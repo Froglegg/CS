@@ -10,11 +10,17 @@ s = "unlzbqjiyqtuwszwoctx"
 # expected qtuw
 longestAlphabeticSubString = ""
 string = ""
-for char in s:
-    if (char >= s[s.index(char) - 1] and s.index(char) != 0) or string == char:
+for idx, char in enumerate(s):
+    if char >= s[idx - 1] or string == char:
         string += char
         if len(string) > len(longestAlphabeticSubString):
             longestAlphabeticSubString = string
     else:
         string = char
 print("Longest substring in alphabetical order is: " + longestAlphabeticSubString)
+
+for char in s:
+    print(s.index(char))
+
+for idx, char in enumerate(s):
+    print(s[idx])
