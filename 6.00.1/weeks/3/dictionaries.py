@@ -1,2 +1,2 @@
 animals = {'a': 'aardvark', 'b': 'baboon', 'c': 'coati'}
-animals
+animals.values()
