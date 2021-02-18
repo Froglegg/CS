@@ -1,65 +1,148 @@
 {\rtf1\ansi\ansicpg1252\cocoartf2513
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;\f1\fnil\fcharset0 Tahoma-Bold;\f2\fnil\fcharset0 Tahoma;
-\f3\froman\fcharset0 TimesNewRomanPSMT;\f4\fnil\fcharset0 Menlo-Regular;}
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Calibri;\f1\fnil\fcharset0 Calibri-Bold;\f2\fnil\fcharset0 Menlo-Regular;
+\f3\fnil\fcharset0 Menlo-Italic;}
 {\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red155\green162\blue177;\red255\green255\blue255;
-\red136\green185\blue102;\red30\green33\blue39;\red197\green136\blue83;\red72\green168\blue181;\red184\green93\blue213;
-}
+\red108\green113\blue123;\red30\green33\blue39;\red184\green93\blue213;\red222\green180\blue104;\red136\green185\blue102;
+\red72\green168\blue181;\red197\green136\blue83;}
 {\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c67059\c69804\c74902;\cssrgb\c100000\c100000\c100000;
-\cssrgb\c59608\c76471\c47451;\cssrgb\c15686\c17255\c20392;\cssrgb\c81961\c60392\c40000;\cssrgb\c33725\c71373\c76078;\cssrgb\c77647\c47059\c86667;
-}
+\cssrgb\c49804\c51765\c55686;\cssrgb\c15686\c17255\c20392;\cssrgb\c77647\c47059\c86667;\cssrgb\c89804\c75294\c48235;\cssrgb\c59608\c76471\c47451;
+\cssrgb\c33725\c71373\c76078;\cssrgb\c81961\c60392\c40000;}
 \margl1440\margr1440
 \deftab720
 \pard\pardeftab720\partightenfactor0
 
-\f0\fs22 \cf2 \up0 \nosupersub \ulnone Richard Hayes Crowley\
-01/31/2021\
-CSC_157_Lab_02 Q&A \
-\
-\pard\pardeftab720\partightenfactor0
-
-\f1\b\fs20 \cf2 \
-1. This lab involves calculating tip amounts for various percentages. Is the dining tax included in the calculation of the tip amounts? Support your answer.\
-\pard\pardeftab720\partightenfactor0
-
-\f2\b0 \cf2 \
-Dining tax is not included in the calculation of the tip amounts, since a tip should be calculated only by the listed menu prices and the perceived quality of service. \
-\
-\pard\pardeftab720\partightenfactor0
-
-\f1\b \cf2 2. Why is formatting the display for both input and output important?\
-\pard\pardeftab720\partightenfactor0
-
-\f2\b0 \cf2 \
-Formatting the display of both input and output into currency types (rounded floats with two decimal points) is important for user experience (building trust, etc.). Besides displaying the data in currency format, the user input must be validated as float types and rounded to a second decimal place, as well, or else our application will not work. \
-\
-\pard\pardeftab720\partightenfactor0
-
-\f1\b \cf2 3. What should you do if your program incorrectly calculates an amount?\
-\pard\pardeftab720\partightenfactor0
-
-\f2\b0 \cf2 \
-Begin debugging with print statements and/or an IDE debugger. \
-\
-\pard\pardeftab720\partightenfactor0
-
-\f1\b \cf2 4. How would you modify your program such that it would display a split total amount, i.e. your output would display the amount that each dining guest would pay?\
-\
-\pard\pardeftab720\partightenfactor0
-
-\f2\b0 \cf2 I could modify my program to show a split total by prompting the user to input the number of guests to split the check with, divide the total amount by the number of guests, and output that as a \'93from each\'94 total. 
-\f1\b \
-\
-5. What have you learned from performing and coding for this lab assignment?\
-\
-
-\f2\b0 I learned how to format strings for currency, for example (using f strings in Python 3.9): \
-\pard\pardeftab720\partightenfactor0
-
-\f3 \cf3 \cb4 \
+\f0\fs24 \cf2 \up0 \nosupersub \ulnone Richard Hayes Crowley\
+01/31/2021\uc0\u8232 CSC_157_LAB_02 \u8232 \u8232 
+\f1\b Source code:
+\f0\b0 \
 \pard\pardeftab720\sl360\partightenfactor0
 
-\f4\fs24 \cf5 \cb6 (Tip : $\cf7 \cb6 \{\cf8 \cb6 round\cf3 \cb6 (tip1,\cf7 \cb6 2\cf3 \cb6 )\cf9 \cb6 :0.2f\cf7 \cb6 \}\cf5 \cb6 ;\cf3 \cb4 \
+\f2 \cf3 \cb4 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\i \cf5 \cb6 # Richard Hayes Crowley
+\f2\i0 \cf3 \cb4 \
+
+\f3\i \cf5 \cb6 # 01/31/2021
+\f2\i0 \cf3 \cb4 \
+
+\f3\i \cf5 \cb6 # CSC_157_Lab_02
+\f2\i0 \cf3 \cb4 \
+
+\f3\i \cf5 \cb6 # the restaurant tip calculator
+\f2\i0 \cf3 \cb4 \
+\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf7 \cb6 class\cf3 \cb6  \cf8 \cb6 EmptyValue\cf3 \cb6 (Exception):\cf3 \cb4 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf3 \cb6     \cf9 \cb6 """Custom exception for empty restaurant or server name"""\cf3 \cb4 \
+\cf3 \cb6     
+\f3\i \cf7 \cb6 pass
+\f2\i0 \cf3 \cb4 \
+\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\i \cf5 \cb6 # some error handling,
+\f2\i0 \cf3 \cb4 \
+
+\f3\i \cf5 \cb6 # \cf7 \cb6 TODO\cf5 \cb6 : execute failed input question again after exception, current behavior is the loop restarts at the beginning after an exception
+\f2\i0 \cf3 \cb4 \
+\
+\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf10 \cb6 print\cf3 \cb6 (\cf9 \cb6 "Richard Hayes Crowley \cf10 \cb6 \\n\cf9 \cb6 01/31/2021 \cf10 \cb6 \\n\cf9 \cb6 CSC_157_Lab_02"\cf3 \cb6 )\cf3 \cb4 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\i \cf7 \cb6 while
+\f2\i0 \cf3 \cb6  \cf11 \cb6 True\cf3 \cb6 :\cf3 \cb4 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf3 \cb6     
+\f3\i \cf7 \cb6 try
+\f2\i0 \cf3 \cb6 :\cf3 \cb4 \
+\cf3 \cb6         locale \cf10 \cb6 =\cf3 \cb6  \cf10 \cb6 input\cf3 \cb6 (\cf9 \cb6 "please enter the restaurant location: "\cf3 \cb6 )\cf3 \cb4 \
+\cf3 \cb6         
+\f3\i \cf7 \cb6 if
+\f2\i0 \cf3 \cb6  \cf7 \cb6 not\cf3 \cb6  locale:\cf3 \cb4 \
+\cf3 \cb6             
+\f3\i \cf7 \cb6 raise
+\f2\i0 \cf3 \cb6  EmptyValue\cf3 \cb4 \
+\
+\cf3 \cb6         server \cf10 \cb6 =\cf3 \cb6  \cf10 \cb6 input\cf3 \cb6 (\cf9 \cb6 "please enter the server name: "\cf3 \cb6 )\cf3 \cb4 \
+\
+\cf3 \cb6         
+\f3\i \cf7 \cb6 if
+\f2\i0 \cf3 \cb6  \cf7 \cb6 not\cf3 \cb6  server:\cf3 \cb4 \
+\cf3 \cb6             
+\f3\i \cf7 \cb6 raise
+\f2\i0 \cf3 \cb6  EmptyValue\cf3 \cb4 \
+\
+\cf3 \cb6         subtotal \cf10 \cb6 =\cf3 \cb6  \cf10 \cb6 float\cf3 \cb6 (\cf10 \cb6 input\cf3 \cb6 (\cf9 \cb6 "please enter the menu check subtotal: "\cf3 \cb6 ))\cf3 \cb4 \
+\cf3 \cb6         tax \cf10 \cb6 =\cf3 \cb6  \cf10 \cb6 float\cf3 \cb6 (\cf10 \cb6 input\cf3 \cb6 (\cf9 \cb6 "please enter the total tax amount: "\cf3 \cb6 ))\cf3 \cb4 \
+\
+\cf3 \cb6     
+\f3\i \cf7 \cb6 except
+\f2\i0 \cf3 \cb6  EmptyValue:\cf3 \cb4 \
+\cf3 \cb6         \cf10 \cb6 print\cf3 \cb6 (\cf9 \cb6 "Please enter a restaurant location and server name before continuing"\cf3 \cb6 )\cf3 \cb4 \
+\
+\cf3 \cb6     
+\f3\i \cf7 \cb6 except
+\f2\i0 \cf3 \cb6  ValueError:\cf3 \cb4 \
+\cf3 \cb6         \cf10 \cb6 print\cf3 \cb6 (\cf9 \cb6 "input is not a float type, try again!"\cf3 \cb6 )\cf3 \cb4 \
+\
+\cf3 \cb6     
+\f3\i \cf7 \cb6 else
+\f2\i0 \cf3 \cb6 :\cf3 \cb4 \
+\cf3 \cb6         
+\f3\i \cf7 \cb6 break
+\f2\i0 \cf3 \cb4 \
+\
+\
+\cf3 \cb6 serviceType \cf10 \cb6 =\cf3 \cb6  \cf9 \cb6 "excellent service"\cf3 \cb4 \
+\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\i \cf5 \cb6 # process the data
+\f2\i0 \cf3 \cb4 \
+\
+
+\f3\i \cf5 \cb6 # the first tip level
+\f2\i0 \cf3 \cb4 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf3 \cb6 tip1 \cf10 \cb6 =\cf3 \cb6  \cf11 \cb6 0.22\cf3 \cb6  \cf10 \cb6 *\cf3 \cb6  subtotal\cf3 \cb4 \
+\cf3 \cb6 tip2 \cf10 \cb6 =\cf3 \cb6  \cf11 \cb6 0.2\cf3 \cb6  \cf10 \cb6 *\cf3 \cb6  subtotal\cf3 \cb4 \
+\cf3 \cb6 tip3 \cf10 \cb6 =\cf3 \cb6  \cf11 \cb6 0.18\cf3 \cb6  \cf10 \cb6 *\cf3 \cb6  subtotal\cf3 \cb4 \
+\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\i \cf5 \cb6 # the output for the first tip level
+\f2\i0 \cf3 \cb4 \
+
+\f3\i \cf5 \cb6 # print("for:", serviceType, " ; the tip is $", format(tip1, "0.2f"))
+\f2\i0 \cf3 \cb4 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf10 \cb6 print\cf3 \cb6 (\cf9 \cb6 "\cf10 \cb6 \\n\cf9 \cb6 *** suggested tip: ***\cf10 \cb6 \\n\cf9 \cb6 "\cf3 \cb6 )\cf3 \cb4 \
+\
+\cf10 \cb6 print\cf3 \cb6 (\cf3 \cb4 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf3 \cb6     \cf7 \cb6 f\cf9 \cb6 "Excellent Service 22% (Tip : $\cf11 \cb6 \{\cf10 \cb6 round\cf3 \cb6 (tip1,\cf11 \cb6 2\cf3 \cb6 )\cf7 \cb6 :0.2f\cf11 \cb6 \}\cf9 \cb6 ; Total: $\cf11 \cb6 \{\cf10 \cb6 round\cf3 \cb6 ((subtotal \cf10 \cb6 +\cf3 \cb6  tax \cf10 \cb6 +\cf3 \cb6  tip1), \cf11 \cb6 2\cf3 \cb6 )\cf7 \cb6 :0.2f\cf11 \cb6 \}\cf9 \cb6 )"\cf3 \cb6 )\cf3 \cb4 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf10 \cb6 print\cf3 \cb6 (\cf3 \cb4 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf3 \cb6     \cf7 \cb6 f\cf9 \cb6 "Great Service 20% (Tip : $\cf11 \cb6 \{\cf10 \cb6 round\cf3 \cb6 (tip2,\cf11 \cb6 2\cf3 \cb6 )\cf7 \cb6 :0.2f\cf11 \cb6 \}\cf9 \cb6 ; Total: $\cf11 \cb6 \{\cf10 \cb6 round\cf3 \cb6 ((subtotal \cf10 \cb6 +\cf3 \cb6  tax \cf10 \cb6 +\cf3 \cb6  tip2), \cf11 \cb6 2\cf3 \cb6 )\cf7 \cb6 :0.2f\cf11 \cb6 \}\cf9 \cb6 )"\cf3 \cb6 )\cf3 \cb4 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf10 \cb6 print\cf3 \cb6 (\cf3 \cb4 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf3 \cb6     \cf7 \cb6 f\cf9 \cb6 "Good Service 18% (Tip : $\cf11 \cb6 \{\cf10 \cb6 round\cf3 \cb6 (tip3,\cf11 \cb6 2\cf3 \cb6 )\cf7 \cb6 :0.2f\cf11 \cb6 \}\cf9 \cb6 ; Total: $\cf11 \cb6 \{\cf10 \cb6 round\cf3 \cb6 ((subtotal \cf10 \cb6 +\cf3 \cb6  tax \cf10 \cb6 +\cf3 \cb6  tip3), \cf11 \cb6 2\cf3 \cb6 )\cf7 \cb6 :0.2f\cf11 \cb6 \}\cf9 \cb6 )"\cf3 \cb6 )\cf3 \cb4 \
+\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf10 \cb6 print\cf3 \cb6 (\cf9 \cb6 "\cf10 \cb6 \\n\cf9 \cb6 *** we thank you - please visit us again ***\cf10 \cb6 \\n\cf9 \cb6 "\cf3 \cb6 )\cf3 \cb4 \
+\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf5 \cb1 \
 \pard\pardeftab720\partightenfactor0
 
-\f2\fs20 \cf2 \cb1  \
-I also read up on try/catch statements in `while` loops, and implemented some error handling into my program. }
+\f3\i\fs18 \cf5 \
+\pard\pardeftab720\partightenfactor0
+
+\f1\i0\b\fs24 \cf2 Output:  \
+}
