@@ -2,6 +2,7 @@
 # 01/28/2021
 # CS_157_Lab_01
 
+import math
 print("\nRichard Hayes Crowley\n01/28/2021\nCS_157_Lab_01\n")
 
 totalCost = 0.0
@@ -35,3 +36,14 @@ for i in range(6):
     print("")
 
 print(f"The total cost of the annual usage is: ${round(totalCost,2)}")
+
+
+def extrapolateSeconds(seconds: int) -> str:
+    hours = int(seconds / 3600)
+    minutes = int(seconds / 60) % 60
+    secs = seconds % 60
+
+    return f"{seconds} seconds is {hours} hours, {minutes} minutes, {secs} seconds"
+
+
+print(extrapolateSeconds(6320))
