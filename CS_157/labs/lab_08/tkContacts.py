@@ -1,6 +1,12 @@
 from tkinter import *
-from contacts import *
-from pickle import *
+from tkinter import messagebox
+from contacts import contactlist_default
+import os
+import pickle
+
+#  ternary expression for loading saved contacts if the file exists, else use default contacts list.
+contactlist = pickle.load(open("contacts.p", "rb")) if os.path.exists(
+    "contacts.p") else contactlist_default
 
 
 def selection():
@@ -29,6 +35,15 @@ def loadContact():
     phoneVar.set(phone)
 
 
+def saveContact():
+    pickle.dump(contactlist, open("contacts.p", "wb"))
+
+
+def exitMenu():
+    if (messagebox.askokcancel(title="My Contact List", message="Do you want to exit, OK or Cancel") == 1):
+        os._exit(1)
+
+
 def buildFrame():
     global nameVar, phoneVar, select
     root = Tk()
@@ -53,10 +68,12 @@ def buildFrame():
     btn2 = Button(frame1, text="Update", command=updateContact)
     btn3 = Button(frame1, text="Delete", command=deleteContact)
     btn4 = Button(frame1, text=" Load ", command=loadContact)
+    btn5 = Button(frame1, text=" Save ", command=saveContact)
     btn1.pack(side=LEFT)
     btn2.pack(side=LEFT)
     btn3.pack(side=LEFT)
     btn4.pack(side=LEFT)
+    btn5.pack(side=LEFT)
 
     frame1 = Frame(root)       # allow for selection of names
     frame1.pack()
@@ -65,6 +82,11 @@ def buildFrame():
     scroll.config(command=select.yview)
     scroll.pack(side=RIGHT, fill=Y)
     select.pack(side=LEFT,  fill=BOTH)
+    frame1 = Frame(root)       # allow for selection of names
+    frame1.pack()
+    btn6 = Button(frame1, text=" Exit ", command=exitMenu)
+
+    btn6.pack(side=BOTTOM)
     return root
 
 

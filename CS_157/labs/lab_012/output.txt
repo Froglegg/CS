@@ -1,0 +1,73 @@
+CS/CS_157/labs/lab_012 on  master [⇡✘!?] via 🅒 base
+➜ python lab_012.py
+How would you like to sort the available flights?
+1) Date
+2) Destination
+3) Cost
+4) Airline
+5) Time
+1
+Please enter a date (MM/DD)
+12/13
+12/13 12:00 PM SFO $ 170.00 United
+12/13 03:00 PM SAT $ 220.00 United
+Would you like to go again (Y/N)? Y
+How would you like to sort the available flights?
+1) Date
+2) Destination
+3) Cost
+4) Airline
+5) Time
+2
+Please enter a US airport code
+ATL
+12/18 10:00 PM ATL $ 200.00 JetBlue
+Would you like to go again (Y/N)? Y
+How would you like to sort the available flights?
+1) Date
+2) Destination
+3) Cost
+4) Airline
+5) Time
+3
+Please enter a cost in US dollars
+70
+12/16 10:00 AM CLE $ 70.00 JetBlue
+Would you like to go again (Y/N)? Y
+How would you like to sort the available flights?
+1) Date
+2) Destination
+3) Cost
+4) Airline
+5) Time
+4
+Please enter an Airline
+Spirit
+12/14 01:00 PM JFK $ 150.00 Spirit
+12/15 11:00 AM LAX $ 190.00 Spirit
+12/17 08:00 PM DFW $ 320.00 Spirit
+Would you like to go again (Y/N)? Y
+How would you like to sort the available flights?
+1) Date
+2) Destination
+3) Cost
+4) Airline
+5) Time
+5
+Please enter a time (Standard US format, e.g., 12:00 PM)
+12:00 PM
+12/13 12:00 PM SFO $ 170.00 United
+12/15 12:00 PM JNU $ 550.00 Alaska
+Would you like to go again (Y/N)? Y
+How would you like to sort the available flights?
+1) Date
+2) Destination
+3) Cost
+4) Airline
+5) Time
+5
+Please enter a time (Standard US format, e.g., 12:00 PM)
+03:00 PM
+12/13 03:00 PM SAT $ 220.00 United
+Would you like to go again (Y/N)? n
+(base)

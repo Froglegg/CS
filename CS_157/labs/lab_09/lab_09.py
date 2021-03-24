@@ -1,29 +1,9 @@
-# word count function
-def wordCount():
-    fr = open("sentences.txt")
-    line = fr.readline()
-    while (line):
-        line = line.lower()
-        line = line.split(" ")
-        print("word count: ", len(line))
-        line = fr.readline()
-    fr.close()
-
-
-def vowelCount():
-    fr = open("sentences.txt")
-    line = fr.readline()
-    while (line):
-        line = line.lower()
-        print("vowel count: ",
-              len([v for v in line if v in "aeiou"]))
-        line = fr.readline()
-    fr.close()
-
-
+# Richard Hayes Crowley
+# 03/17/2020
+# CSC_157
 def decodeFile():
     fr = open("sentences.txt")
-    codeKey = [[0, 1, 2, 4, 7, 14], [6, 7], [1, 16, 19], [7, 8], [14, 18]]
+    codeKey = [[0, 1, 2, 4, 7, 14], [6, 7], [1, 16], [5, 7, 8], [14, 18]]
     line = fr.readline()
     steganograph = []
     while_loop_idx = 0
@@ -34,15 +14,16 @@ def decodeFile():
                     steganograph.append(value)
         while_loop_idx += 1
         line = fr.readline()
-    print(steganograph)
-    return steganograph
+    return "".join(steganograph)
 
 
-decodeFile()
-# wordCount()
+secret_message = decodeFile()
+print('Richard Hayes Crowley\nCSC_157\n\n')
+print(f'The secret message is: {secret_message}')
 
-# print("")
-
-# vowelCount()
-
-# print("")
+line = "the enemy has advanced"
+listLine = [ch for ch in line]
+for x in range(0, len(listLine)):
+    if (x % 4 == 0):
+        print(listLine[x], end="")
+print("\n\n")

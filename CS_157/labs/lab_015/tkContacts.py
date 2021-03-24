@@ -5,7 +5,13 @@ import sqlite3
 import myDatabase as db
 
 
+class EmptyValueException(Exception):
+    pass
+
+
 def main():
+
+    global conn
     # create a database connection
     conn = db.createConnection("contacts.db")
 
@@ -17,37 +23,47 @@ def main():
         print("Error! cannot create the database connection.")
 
     with conn:
-
-        #  with connection established, build contactlist
-        contactlist = [row for row in db.readTable(conn)]
-
         def selection():
-            print("At %s of %d" % (select.curselection(), len(contactlist)))
-            print(int(select.curselection()[0]))
+            # print(int(select.curselection()[0]))
             return int(select.curselection()[0])
 
         def addContact():
-            contactlist.append([nameVar.get(), phoneVar.get()])
-            setList()
+            try:
+                if not nameVar.get().strip() or not phoneVar.get().strip():
+                    raise EmptyValueException
+                db.insertIntoTable(conn, [nameVar.get(), phoneVar.get()])
+                setList()
+            except EmptyValueException:
+                messagebox.showerror(
+                    "Error", "Please enter a value for both name and phone number.")
 
         def updateContact():
-            contactlist[selection()] = [nameVar.get(), phoneVar.get()]
-            setList()
+            try:
+                contactId = contactlist[selection()][0]
+                db.updateTable(
+                    conn, [nameVar.get(), phoneVar.get(), contactId])
+                setList()
+            except IndexError:
+                messagebox.showerror(
+                    "Error", "Please select a contact to update.")
 
         def deleteContact():
-            del contactlist[selection()]
-            setList()
+            try:
+                contactId = contactlist[selection()][0]
+                db.deleteFromTable(conn, contactId)
+                setList()
+            except IndexError:
+                messagebox.showerror(
+                    "Error", "Please select a contact to delete.")
 
         def loadContact():
-            uuid, name, phone = contactlist[selection()]
-            nameVar.set(name)
-            phoneVar.set(phone)
-
-        def saveContact():
-            # iterate over contact list and insert each
-            for contact in contactlist:
-                print(contact)
-                db.insertIntoTable(conn, contact)
+            try:
+                contactId, name, phone = contactlist[selection()]
+                nameVar.set(name)
+                phoneVar.set(phone)
+            except IndexError:
+                messagebox.showerror(
+                    "Error", "Please select a contact to load.")
 
         def exitMenu():
             if (messagebox.askokcancel(title="My Contact List", message="Do you want to exit, OK or Cancel") == 1):
@@ -77,12 +93,10 @@ def main():
             btn2 = Button(frame1, text="Update", command=updateContact)
             btn3 = Button(frame1, text="Delete", command=deleteContact)
             btn4 = Button(frame1, text=" Load ", command=loadContact)
-            btn5 = Button(frame1, text=" Save ", command=saveContact)
             btn1.pack(side=LEFT)
             btn2.pack(side=LEFT)
             btn3.pack(side=LEFT)
             btn4.pack(side=LEFT)
-            btn5.pack(side=LEFT)
 
             frame1 = Frame(root)       # allow for selection of names
             frame1.pack()
@@ -99,10 +113,16 @@ def main():
             return root
 
         def setList():
-            contactlist.sort()
+            global contactlist
+            contactlist = db.readTable(conn)
+            # sort the list by name, which is second element in tuple...
+            # lambda signifies an anonymous function, so we're calling an anon function that returns the second element in the tuple to the sort function
+            contactlist.sort(key=lambda x: x[1])
+            # delete all elements from the select element
             select.delete(0, END)
-            print(contactlist)
-            for uuid, name, phone in contactlist:
+            # insert each name from the list to the end of the 			    # select
+            # element
+            for id, name, phone in contactlist:
                 select.insert(END, name)
 
         root = buildFrame()

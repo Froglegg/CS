@@ -1,0 +1,17 @@
+{
+    "An Ideal Husband": {
+        "ancillary": false,
+        "author": "Oscar Wilde",
+        "description": "Wilde's scintillating drawing-room comedy "
+    },
+    "Crime & Punishment": {
+        "ancillary": false,
+        "author": "Dostoevsky",
+        "description": "the truth will out"
+    },
+    "Great Expectations": {
+        "ancillary": true,
+        "author": "Charles Dickens",
+        "description": "High hopes dashed."
+    }
+}
