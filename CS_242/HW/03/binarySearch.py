@@ -1,11 +1,5 @@
 from tabulate import tabulate
 
-example = [["MO-123", "Tote-123", "Item-123", 23, "07/04/2021"],
-           ["MO-1234", "Tote-1234", "Item-1234", 64, "07/07/2021"]]
-
-print(tabulate(example, headers=[
-    "MO (Grandparent) Tag", "Tote (parent)", "Item (child) #", "Quantity (item)", "Need date (grandparent)" "Quantity (child)"], tablefmt='github', numalign="left"))
-
 
 def binarySearch(target, sortedLyst):
     '''note! This assumes that list is already sorted!!! '''
@@ -19,7 +13,7 @@ def binarySearch(target, sortedLyst):
         if target == sortedLyst[midpoint]:
             print(tabulate(iterationTable, headers=[
                 "Left", "Right", "Midpoint"], tablefmt='github', numalign="left"))
-            return midpoint
+            return f"Index of {target} is {midpoint}"
         elif target < sortedLyst[midpoint]:
             right = midpoint - 1
         else:
@@ -29,5 +23,5 @@ def binarySearch(target, sortedLyst):
     return -1
 
 
-testLyst = [20, 44, 48, 55, 62, 66, 74, 88, 93, 99]
-binarySearch(90, testLyst)
+testLyst = [12, 18, 23, 25, 29, 32, 35, 40, 58, 66]
+binarySearch(18, testLyst)

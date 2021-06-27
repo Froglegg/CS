@@ -19,12 +19,12 @@ def selectionSort(lyst):
             j += 1
         if minIndex != i:
             swap(lyst, minIndex, i)
+        print(lyst)
         i += 1
 
 
-lyst = [3, 2, 5, 1, 4]
+lyst = [4, 8, 19, 2, 28, 21]
 selectionSort(lyst)
-print(lyst)
 # selection sort is O(n^2)
 
 
