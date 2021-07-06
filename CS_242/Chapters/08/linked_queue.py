@@ -3,8 +3,17 @@ from node import Node
 
 
 class LinkedQueue(AbstractCollection):
-    def __init__(self, sourceCollection) -> None:
+    def __init__(self, sourceCollection=None) -> None:
         super().__init__(sourceCollection=sourceCollection)
+
+    def __iter__(self):
+        def visitNodes(node):
+            if node != None:
+                visitNodes(node.next)
+                tempList.append(node.data)
+        tempList = list()
+        visitNodes(self.front)
+        return iter(tempList)
 
     def add(self, newItem):
         newNode = Node(newItem, None)
@@ -24,3 +33,23 @@ class LinkedQueue(AbstractCollection):
             self.rear = None
         self.size -= 1
         return oldItem
+
+    def peek(self):
+        if self.isEmpty():
+            raise KeyError("The queue is empty.")
+        return self.front.data
+
+    def clear(self):
+        self.size = 0
+        self.front = None
+
+
+# q = LinkedQueue([1, 2, 3])
+# q.add(4)
+# print(q)
+
+# print(q.peek())
+
+# c = LinkedQueue(q)
+# print(c)
+# print(c.peek())
