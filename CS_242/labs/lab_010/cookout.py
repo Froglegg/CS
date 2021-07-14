@@ -2,7 +2,6 @@ from priority_linked_queue import Comparable, PriorityLinkedQueue
 from simple_term_menu import TerminalMenu
 from tabulate import tabulate
 from random import choice
-import json
 
 # priority is given in this queue to items that take very little time to make, e.g., fries and milkshakes, as opposed to cheeseburgers and cookout trays
 # the queue is constructed by passing in a number of these items and then popping them out in order of priority and time spent in the queue

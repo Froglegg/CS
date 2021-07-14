@@ -40,4 +40,6 @@ pq = PriorityLinkedQueue([Comparable("Third Class", 3), Comparable(
     "Second Class", 2), Comparable("Third Class", 3), Comparable("First Class", 1), Comparable(
     "Second Class", 2)])
 
-print(pq.peek())
+print(pq)
+pq.pop()
+print(pq)

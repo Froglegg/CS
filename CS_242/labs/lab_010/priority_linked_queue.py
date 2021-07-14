@@ -149,10 +149,3 @@ class PriorityLinkedQueue(object):
     def clear(self):
         self.size = 0
         self.front = None
-
-
-# pq = PriorityLinkedQueue([Comparable("Third Class", 3), Comparable(
-#     "Second Class", 2), Comparable("Third Class", 3), Comparable("First Class", 1), Comparable(
-#     "Second Class", 2)])
-# while not pq.isEmpty():
-#     print(pq.dequeue())
