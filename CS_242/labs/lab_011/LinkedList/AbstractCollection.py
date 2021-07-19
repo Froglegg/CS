@@ -13,7 +13,7 @@ class AbstractCollection(object):
         return self.size
 
     def __str__(self):
-        return "{" + f"{''.join(map(str, self))}" + "}"
+        return "{" + f"{', '.join(map(str, self))}" + "}"
 
     def __add__(self, other):
         result = AbstractCollection(self)

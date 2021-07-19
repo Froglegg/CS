@@ -1,6 +1,7 @@
 from LinkedList.LinkedList import LinkedList
 from LinkedList.LinkedListIterator import LinkedListIterator
 from datetime import datetime
+from tabulate import tabulate
 
 
 class Product(object):
@@ -15,37 +16,11 @@ class Product(object):
         return self.name
 
 
-class Asset(object):
-    def __init__(self, product: Product, unitOfMeasure: str, count: int) -> None:
-        super().__init__()
-        self.eventLog = []
-        self.product = product
-        self.unitOfMeasure = unitOfMeasure
-        self.count = count
-
-    def __str__(self):
-        return f"{self.count} {self.unitOfMeasure} {self.product}"
-
-    def getCount(self):
-        return self.count
-
-    def getUnitOfMeasure(self):
-        return self.unitOfMeasure
-
-    def getProduct(self):
-        return self.product
-
-    def updateEventLog(self, event):
-        self.eventLog.append(event)
-
-    def getEventLog(self):
-        return self.eventLog
-
-
 class Event(object):
-    def __init__(self, type: str) -> None:
+    def __init__(self, asset: str, type: str) -> None:
         super().__init__()
         self.type = type
+        self.asset = asset
 
         now = datetime.now()
         current_time = now.strftime("%H:%M:%S")
@@ -57,49 +32,98 @@ class Event(object):
     def getTimeOfLog(self):
         return self.time_of_log
 
-    def getType(self):
+    def getEvent(self):
         return self.type
+
+    def getAsset(self):
+        return self.asset
+
+
+class Asset(object):
+    def __init__(self, product: Product, unitOfMeasure: str,) -> None:
+        super().__init__()
+        self.eventLog = []
+        self.product = product
+        self.unitOfMeasure = unitOfMeasure
+
+    def __str__(self):
+        return f"{self.unitOfMeasure} {self.product}"
+
+    def getUnitOfMeasure(self):
+        return self.unitOfMeasure
+
+    def getProduct(self):
+        return self.product
+
+    def updateEventLog(self, event: Event):
+        self.eventLog.append(event)
+
+    def getEventLog(self):
+        return self.eventLog
 
 
 class Batch(LinkedList):
-    def __init__(self, assets) -> None:
+    def __init__(self, assets: list[Asset], name: str) -> None:
+        self.name = name
         self.eventLog = []
         super().__init__(assets)
         self.list_iterator = LinkedListIterator(self)
         self.list_iterator.first()
 
-    def updateEventLog(self, event: Event, assetIndex: int = None):
-        ''' pass in position of asset to be updated. If position is  not defined, update entire batch event log'''
+        now = datetime.now()
+        current_time = now.strftime("%H:%M:%S")
+        self.time_created = current_time
 
+    def getName(self):
+        return str(self.name)
+
+    def getTimeCreated(self):
+        return str(self.time_created)
+
+    def updateEventLog(self, event: str, assetIndex: int = None):
+        ''' pass in position of asset to be updated. If position is  not defined, update entire batch event log'''
+        # reset cursor
         self.list_iterator.first()
 
-        eventTuple = (event.getType(), event.getTimeOfLog())
-
         while self.list_iterator.hasNext():
+
             theNode = self.list_iterator.next()
+
             pos = self.list_iterator.getPosition()
+
             if(assetIndex <= pos):
+
+                newEvent = Event(theNode.getUnitOfMeasure(), event)
+
+                eventTuple = (newEvent.getAsset(),
+                              newEvent.getEvent(), newEvent.getTimeOfLog())
+
                 theNode.updateEventLog(eventTuple)
+
+        # reset cursor
+        self.list_iterator.first()
 
     def getEventLog(self):
         event_log_collection = []
         for node in self:
             event_log_collection.append(node.getEventLog())
-
         return event_log_collection
 
+    def getListIterator(self):
+        return self.list_iterator
 
-aProduct = Product("foo")
-aPallet = Asset(aProduct, "pallet", 2)
-aCase = Asset(aProduct, "case", aPallet.getCount() * 2)
-aItem = Asset(aProduct, "item", aCase.getCount()*2)
+    def getBatchTable(self):
+        data = []
+        for i in self:
+            data.append([i.unitOfMeasure, i.product.name])
 
-theBatch = Batch([aPallet, aCase, aItem])
-li = LinkedListIterator(theBatch)
+        return tabulate(data, headers=[
+            "Unit of Measure", "Product"], tablefmt="github", numalign="left")
 
-e = Event("Lost")
-f = Event("Arrived at Location")
-
-theBatch.updateEventLog(e, 2)
-
-theBatch.getEventLog()
+    def getEventLogTable(self):
+        eventLog = self.getEventLog()
+        data = []
+        for i in eventLog:
+            for j in i:
+                data.append([j[0], j[1], j[2]])
+        return tabulate(data, headers=["Asset", "Event", "Time of Log"])
