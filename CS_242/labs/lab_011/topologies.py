@@ -30,11 +30,20 @@ def main():
             batch_name = str(input("\nEnter a name for your batch: "))
             product = Product(str(input("\nWhat product is in the batch?: ")))
 
-            pallet = Asset(product, "pallet")
-            case = Asset(product, "case")
-            item = Asset(product, "item")
+            pallet = Asset(product, "pallet", int(
+                input("How many pallets? Integer only: ")))
 
-            batch = Batch([pallet, case, item], batch_name)
+            case = Asset(product, "case", int(
+                pallet.getBatchCount() * input("How many cases per pallet? Integer only: ")))
+
+            item = Asset(product, "item", int(
+                case.getBatchCount() * input("How many items per case? Integer only: ")))
+
+            palletList = [pallet for i in range(pallet.getBatchCount())]
+            caseList = [case for i in range(case.getBatchCount())]
+            itemList = [item for i in range(item.getBatchCount())]
+
+            batch = Batch([pallets, cases, items], batch_name)
             batches.append(batch)
             print(f"\n{batch.getName()} batch created!\n")
             print(batch.getBatchTable())
