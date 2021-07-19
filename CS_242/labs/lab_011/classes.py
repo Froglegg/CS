@@ -41,9 +41,10 @@ class Event(object):
 
 class Asset(LinkedList):
 
-    def __init__(self, product: Product, unitOfMeasure: str, assetChildren) -> None:
+    def __init__(self, product: Product, unitOfMeasure: str, assetChildren, batchName: str = None) -> None:
 
         super().__init__(assetChildren)
+        self.batchName = batchName
         self.assetChildren = assetChildren
         self.eventLog = []
         self.product = product
@@ -59,6 +60,10 @@ class Asset(LinkedList):
     def __str__(self):
         return f"{self.unitOfMeasure} {self.product} {self.assetChildren}"
 
+    def getBatchName(self):
+        if self.batchName:
+            return str(self.batchName)
+
     def getUnitOfMeasure(self):
         return self.unitOfMeasure
 
@@ -70,6 +75,54 @@ class Asset(LinkedList):
 
     def getEventLog(self):
         return self.eventLog
+
+    def updateEventLog(self, event: str):
+        ''' pass in position of asset to be updated. If position is  not defined, update entire batch event log'''
+        # reset cursor
+        self.list_iterator.first()
+
+        while self.list_iterator.hasNext():
+
+            theNode = self.list_iterator.next()
+
+            newEvent = Event(theNode.getUnitOfMeasure(), event)
+
+            eventTuple = (newEvent.getAsset(),
+                          newEvent.getEvent(), newEvent.getTimeOfLog())
+
+            theNode.updateEventLog(eventTuple)
+
+            if theNode.assetChildren:
+                for child in theNode.assetChildren:
+                    child.updateEventLog(eventTuple)
+
+        # reset cursor
+        self.list_iterator.first()
+
+    def getEventLog(self):
+        event_log_collection = []
+        for node in self:
+            event_log_collection.append(node.getEventLog())
+        return event_log_collection
+
+    def getListIterator(self):
+        return self.list_iterator
+
+    def getAssetTable(self):
+        data = []
+        for i in self:
+            data.append([i.unitOfMeasure, i.product.name])
+
+        return tabulate(data, headers=[
+            "Unit of Measure", "Product"], tablefmt="github", numalign="left")
+
+    def getEventLogTable(self):
+        eventLog = self.getEventLog()
+        data = []
+        for i in eventLog:
+            for j in i:
+                data.append([j[0], j[1], j[2]])
+        return tabulate(data, headers=["Asset", "Event", "Time of Log"])
 
 
 # class Batch(LinkedList):
@@ -90,28 +143,28 @@ class Asset(LinkedList):
 #     def getTimeCreated(self):
 #         return str(self.time_created)
 
-#     def updateEventLog(self, event: str, assetIndex: int = None):
-#         ''' pass in position of asset to be updated. If position is  not defined, update entire batch event log'''
-#         # reset cursor
-#         self.list_iterator.first()
+    # def updateEventLog(self, event: str, assetIndex: int = None):
+    #     ''' pass in position of asset to be updated. If position is  not defined, update entire batch event log'''
+    #     # reset cursor
+    #     self.list_iterator.first()
 
-#         while self.list_iterator.hasNext():
+    #     while self.list_iterator.hasNext():
 
-#             theNode = self.list_iterator.next()
+    #         theNode = self.list_iterator.next()
 
-#             pos = self.list_iterator.getPosition()
+    #         pos = self.list_iterator.getPosition()
 
-#             if(assetIndex <= pos):
+    #         if(assetIndex <= pos):
 
-#                 newEvent = Event(theNode.getUnitOfMeasure(), event)
+    #             newEvent = Event(theNode.getUnitOfMeasure(), event)
 
-#                 eventTuple = (newEvent.getAsset(),
-#                               newEvent.getEvent(), newEvent.getTimeOfLog())
+    #             eventTuple = (newEvent.getAsset(),
+    #                           newEvent.getEvent(), newEvent.getTimeOfLog())
 
-#                 theNode.updateEventLog(eventTuple)
+    #             theNode.updateEventLog(eventTuple)
 
-#         # reset cursor
-#         self.list_iterator.first()
+    #     # reset cursor
+    #     self.list_iterator.first()
 
 #     def getEventLog(self):
 #         event_log_collection = []
@@ -119,28 +172,25 @@ class Asset(LinkedList):
 #             event_log_collection.append(node.getEventLog())
 #         return event_log_collection
 
-#     def getListIterator(self):
-#         return self.list_iterator
+    # def getListIterator(self):
+    #     return self.list_iterator
 
-#     def getBatchTable(self):
-#         data = []
-#         for i in self:
-#             data.append([i.unitOfMeasure, i.product.name])
+    # def getBatchTable(self):
+    #     data = []
+    #     for i in self:
+    #         data.append([i.unitOfMeasure, i.product.name])
 
-#         return tabulate(data, headers=[
-#             "Unit of Measure", "Product"], tablefmt="github", numalign="left")
-
-#     def getEventLogTable(self):
-#         eventLog = self.getEventLog()
-#         data = []
-#         for i in eventLog:
-#             for j in i:
-#                 data.append([j[0], j[1], j[2]])
-#         return tabulate(data, headers=["Asset", "Event", "Time of Log"])
-
-
+    #     return tabulate(data, headers=[
+    #         "Unit of Measure", "Product"], tablefmt="github", numalign="left")
+    # def getEventLogTable(self):
+    #     eventLog = self.getEventLog()
+    #     data = []
+    #     for i in eventLog:
+    #         for j in i:
+    #             data.append([j[0], j[1], j[2]])
+    #     return tabulate(data, headers=["Asset", "Event", "Time of Log"])
 batch_name = "test"
-product = "foo"
+product = Product("foo")
 
 palletCount = 2
 
@@ -149,9 +199,23 @@ caseCount = 4
 itemCount = 8
 
 batch = Asset(product, "batch", [Asset(product, "pallet", [Asset(product, "case", [Asset(product, "item", None)
-                                                                                   for item in range(itemCount)]) for case in range(caseCount)]) for pallet in range(palletCount)])
+                                                                                   for item in range(itemCount)]) for case in range(caseCount)]) for pallet in range(palletCount)], batchName=batch_name)
+
+li = batch.getListIterator()
 
 
+def recurseAndPrintTables(li):
+    asset: Asset = li.next()
+    print("")
+    print(asset.getAssetTable())
+    li = asset.getListIterator()
+    if li.hasNext():
+        recurseAndPrintTables(li)
+
+
+print(batch.getAssetTable())
+print("")
+recurseAndPrintTables(li)
 # for i in palletList:
 #     for child in i.assetChildren:
 #         child = Asset()
