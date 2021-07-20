@@ -12,7 +12,6 @@ class LinkedList(AbstractList):
         '''
 
         self.head = TwoWayNode()
-
         self.head.previous = self.head.next = self.head
         super().__init__(sourceCollection=sourceCollection)
 
