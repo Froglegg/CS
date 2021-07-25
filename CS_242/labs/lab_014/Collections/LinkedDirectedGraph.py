@@ -1,20 +1,22 @@
 from Collections.AbstractCollection import AbstractCollection
-from LinkedVertex import LinkedVertex
-from LinkedEdge import LinkedEdge
+from Collections.LinkedVertex import LinkedVertex
+from Collections.LinkedEdge import LinkedEdge
 from tabulate import tabulate
 
 
 class LinkedDirectedGraph(AbstractCollection):
 
-    def __init__(self, sourceCollection=None) -> None:
+    def __init__(self, sourceCollection=None, edgeLabel=None) -> None:
         self.edgeCount = 0
         self.toEdges = []
         self.vertices: dict(LinkedVertex) = dict()
+        self.edgeLabel = edgeLabel
 
         AbstractCollection.__init__(self, sourceCollection)
 
-    # def __str__(self):
-    #     return f"{[[f'{edge}' for edge in v.neighboringVertices()] for v in self.vertices]}"
+    def __str__(self):
+
+        return f"{[ (f'Source Vertex: {v.getLabel()}',[f'{edge}' for edge in v.edgeList] )for v in self.vertices.values()]}"
 
     def __contains__(self, label):
         return self.containsVertex(label)
@@ -43,11 +45,14 @@ class LinkedDirectedGraph(AbstractCollection):
     # Function to print adjacency list representation of a graph
 
     def printGraph(self):
+
         for vertex in self.vertices.values():
             print(vertex, end=": ")
             # print current vertex and all its neighboring vertices
             for neighborVertex in vertex.neighboringVertices():
-                print(f"({vertex} —> {neighborVertex}) ", end="")
+                edgeWeight = vertex.getEdgeTo(neighborVertex).getWeight()
+                print(
+                    f"({vertex} —> {neighborVertex}, {f'{self.edgeLabel}: ' if self.edgeLabel else ''}{edgeWeight}) ", end="")
             print()
 
     def add(self, label: str):
@@ -94,9 +99,10 @@ class LinkedDirectedGraph(AbstractCollection):
         fromVertex = self.getVertex(fromLabel)
         toVertex = self.getVertex(toLabel)
 
-        fromVertex.addEdgeTo(toVertex, weight)
+        edge = fromVertex.addEdgeTo(toVertex, weight)
         self.toEdges.append(toLabel)
         self.edgeCount += 1
+        return edge
 
     def getEdge(self, fromLabel: str, toLabel: str) -> LinkedEdge or None:
         ''' returns the edge containing the two vertices, or None if no edge exists'''
@@ -215,10 +221,13 @@ class LinkedDirectedGraph(AbstractCollection):
 
                                     newDistance = addWithInfinity(
                                         weight, edge.getWeight())
-
+                                    # if distance not set and or new distance is less than the old distance
                                     if weight2 is INFINITY or newDistance < weight2:
+                                        # set new distance in results grid
                                         row2[2] = newDistance
+                                        # set parent label in results row
                                         row2[3] = label
+
                                 elif label2 not in self.toEdges:
                                     row2[2] = 0
 
@@ -236,18 +245,20 @@ class LinkedDirectedGraph(AbstractCollection):
         return {"title": title, "table": table, "computed": computed}
 
 
-g = LinkedDirectedGraph(["A", "B", "C", "D", "E"])
+# g = LinkedDirectedGraph(["A", "B", "C", "D", "E"], "Distance")
 
-edgeList = [["C", "A", 3], ["A", "C", 4], ["B", "C", 2],
-            ["A", "B", 5], ["C", "B", 8], ["C", "D", 4]]
+# edgeList = [["C", "A", 3], ["A", "C", 4], ["B", "C", 2],
+#             ["A", "B", 5], ["C", "B", 8], ["C", "D", 4]]
 
-for edge in edgeList:
-    g.addEdge(edge[0], edge[1], edge[2])
+# for edge in edgeList:
+#     g.addEdge(edge[0], edge[1], edge[2])
 
-g.printGraph()
+# g.printGraph()
 
-test: LinkedVertex = g.getVertex("A")
-shortestPath = g.shortestPaths(test)
+# test: LinkedVertex = g.getVertex("A")
+# shortestPath = g.shortestPaths(test)
 
-print(shortestPath["title"])
-print(shortestPath["table"])
+# print(shortestPath["title"])
+# print(shortestPath["table"])
+
+# print(g)

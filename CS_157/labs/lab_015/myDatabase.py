@@ -5,7 +5,7 @@ def createConnection(dbFile):
     conn = None
     try:
         conn = sqlite3.connect(dbFile)
-    except Error as e:
+    except:
         print(e)
     return conn
 

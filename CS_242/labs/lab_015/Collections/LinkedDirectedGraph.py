@@ -1,26 +1,83 @@
-from Collections.AbstractCollection import AbstractCollection
-from LinkedVertex import LinkedVertex
-from LinkedEdge import LinkedEdge
+
 from tabulate import tabulate
+from dataclasses import dataclass
+import jsons
+
+from Collections.AbstractCollection import AbstractCollection
+from Collections.LinkedVertex import LinkedVertex
+from Collections.LinkedEdge import LinkedEdge
 
 
 class LinkedDirectedGraph(AbstractCollection):
 
-    def __init__(self, sourceCollection=None) -> None:
+    def __init__(self, sourceCollection=None, edgeList=None, edgeLabel=None) -> None:
         self.edgeCount = 0
         self.toEdges = []
         self.vertices: dict(LinkedVertex) = dict()
+        self.edgeLabel = edgeLabel
 
+        # init using abstract collection, will use linkedGraph.add moethod on each item in sourceCollection
         AbstractCollection.__init__(self, sourceCollection)
 
-    # def __str__(self):
-    #     return f"{[[f'{edge}' for edge in v.neighboringVertices()] for v in self.vertices]}"
+        if edgeList:
+            for edge in edgeList:
+                self.addEdge(edge[0], edge[1], edge[2])
+
+    def __str__(self):
+
+        return f"{[ (f'Source Vertex: {v.getLabel()}',[f'{edge}' for edge in v.edgeList] )for v in self.vertices.values()]}"
 
     def __contains__(self, label):
         return self.containsVertex(label)
 
     def clear(self):
         self.__init__()
+
+    def loadJson(self, jsonObj):
+        ''' 
+        Loads properties from JSON string
+        '''
+
+        jsonDict = jsons.loads(jsonObj)
+
+        vertexList = jsonDict["vertexList"]
+
+        edgeList = jsonDict["edgeList"]
+        edgeLabel = jsonDict["edgeLabel"]
+
+        self.__init__(vertexList,
+                      edgeList, edgeLabel)
+        self.edgeCount = jsonDict["edgeCount"]
+        self.toEdges = jsonDict["toEdges"]
+
+    def saveJson(self):
+        ''' 
+        Converts properties into JSON format and then returns the JSON string
+
+        '''
+        edgeList = []
+        vertexList = []
+
+        for v in self.vertices.values():
+            vLabel = v.getLabel()
+            vertexList.append(vLabel)
+            for e in v.getEdgeList():
+
+                otherVertex = e.getOtherVertex(v).getLabel()
+
+                distance = e.getWeight()
+                edgeList.append([vLabel, otherVertex, distance])
+
+        jsonDict = {
+            "edgeCount": self.edgeCount,
+            "toEdges": self.toEdges,
+            "edgeList": edgeList,
+            "vertexList": vertexList,
+            "edgeLabel": self.edgeLabel
+        }
+        results = jsons.dumps(jsonDict, indent=4)
+
+        return results
 
     def clearEdgeMarks(self):
         for vertex in self.vertices.values():
@@ -43,11 +100,14 @@ class LinkedDirectedGraph(AbstractCollection):
     # Function to print adjacency list representation of a graph
 
     def printGraph(self):
+
         for vertex in self.vertices.values():
             print(vertex, end=": ")
             # print current vertex and all its neighboring vertices
             for neighborVertex in vertex.neighboringVertices():
-                print(f"({vertex} —> {neighborVertex}) ", end="")
+                edgeWeight = vertex.getEdgeTo(neighborVertex).getWeight()
+                print(
+                    f"({vertex} —> {neighborVertex}, {f'{self.edgeLabel}: ' if self.edgeLabel else ''}{edgeWeight}) ", end="")
             print()
 
     def add(self, label: str):
@@ -94,9 +154,10 @@ class LinkedDirectedGraph(AbstractCollection):
         fromVertex = self.getVertex(fromLabel)
         toVertex = self.getVertex(toLabel)
 
-        fromVertex.addEdgeTo(toVertex, weight)
+        edge = fromVertex.addEdgeTo(toVertex, weight)
         self.toEdges.append(toLabel)
         self.edgeCount += 1
+        return edge
 
     def getEdge(self, fromLabel: str, toLabel: str) -> LinkedEdge or None:
         ''' returns the edge containing the two vertices, or None if no edge exists'''
@@ -215,10 +276,13 @@ class LinkedDirectedGraph(AbstractCollection):
 
                                     newDistance = addWithInfinity(
                                         weight, edge.getWeight())
-
+                                    # if distance not set and or new distance is less than the old distance
                                     if weight2 is INFINITY or newDistance < weight2:
+                                        # set new distance in results grid
                                         row2[2] = newDistance
+                                        # set parent label in results row
                                         row2[3] = label
+
                                 elif label2 not in self.toEdges:
                                     row2[2] = 0
 
@@ -236,18 +300,11 @@ class LinkedDirectedGraph(AbstractCollection):
         return {"title": title, "table": table, "computed": computed}
 
 
-g = LinkedDirectedGraph(["A", "B", "C", "D", "E"])
+# edgeList = [["C", "A", 3], ["A", "C", 4], ["B", "C", 2],
+#             ["A", "B", 5], ["C", "B", 8], ["C", "D", 4]]
 
-edgeList = [["C", "A", 3], ["A", "C", 4], ["B", "C", 2],
-            ["A", "B", 5], ["C", "B", 8], ["C", "D", 4]]
+# g = LinkedDirectedGraph(["A", "B", "C", "D", "E"],
+#                         edgeList, edgeLabel="Distance")
 
-for edge in edgeList:
-    g.addEdge(edge[0], edge[1], edge[2])
-
-g.printGraph()
-
-test: LinkedVertex = g.getVertex("A")
-shortestPath = g.shortestPaths(test)
-
-print(shortestPath["title"])
-print(shortestPath["table"])
+# saveJson = g.saveJson()
+# loadJson = g.loadJson(saveJson)

@@ -23,7 +23,6 @@ class LinkedBST(AbstractCollection):
         along with a stack to support returns to parent nodes during the traveral.
         Upon each visit to a node, its item is yielded.
         '''
-
         # create a stack, push the root node, if there is one, onto the stack
         stack = ArrayStack()
         stack.add(self.root)
@@ -192,6 +191,29 @@ class LinkedBST(AbstractCollection):
                 return recurse(node.right)
         # top level call on root made
         return recurse(self.root)
+
+    def preOrder(self):
+        ''' Use probe based loop to visit the nodes,
+        along with a stack to support returns to parent nodes during the traveral.
+        Return iterator
+        '''
+        # create a stack, push the root node, if there is one, onto the stack
+        stack = ArrayStack()
+        stack.add(self.root)
+        lyst = []
+        # while the stack is not empty
+        while stack.isEmpty() is False:
+            # pop a node from the stack
+            node = stack.pop()
+            # yield the item in the node
+            lyst.append(node.data)
+            # push the node's right and left children, if they exist, in that order onto the stack
+            if(node.right):
+                stack.push(node.right)
+            if(node.left):
+                stack.push(node.left)
+
+        return iter(lyst)
 
     def inOrder(self):
         '''supports inorder traversal on a view of self'''
