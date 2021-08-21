@@ -243,22 +243,3 @@ class LinkedDirectedGraph(AbstractCollection):
                          "Index", "Vertex", "Distance", "Parent"], tablefmt="github", numalign="left")
 
         return {"title": title, "table": table, "computed": computed}
-
-
-# g = LinkedDirectedGraph(["A", "B", "C", "D", "E"], "Distance")
-
-# edgeList = [["C", "A", 3], ["A", "C", 4], ["B", "C", 2],
-#             ["A", "B", 5], ["C", "B", 8], ["C", "D", 4]]
-
-# for edge in edgeList:
-#     g.addEdge(edge[0], edge[1], edge[2])
-
-# g.printGraph()
-
-# test: LinkedVertex = g.getVertex("A")
-# shortestPath = g.shortestPaths(test)
-
-# print(shortestPath["title"])
-# print(shortestPath["table"])
-
-# print(g)
