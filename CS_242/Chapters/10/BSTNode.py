@@ -76,6 +76,12 @@ class BSTNode(object):
             current = current.left
         return current
 
+    def findMax(self):
+        current = self
+        while current.hasRightChild():
+            current = current.right
+        return current
+
     def replaceNodeData(self, key, value, lc, rc):
         self.key = key
         self.data = value

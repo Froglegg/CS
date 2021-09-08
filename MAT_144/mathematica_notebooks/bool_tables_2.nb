@@ -1,0 +1,193 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      6831,        185]
+NotebookOptionsPosition[      5888,        161]
+NotebookOutlinePosition[      6330,        178]
+CellTagsIndexPosition[      6287,        175]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"Grid", "[", 
+  RowBox[{
+   RowBox[{"Prepend", "[", 
+    RowBox[{
+     RowBox[{"BooleanTable", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"p", ",", "q", ",", 
+         RowBox[{"p", "||", "q"}], ",", 
+         RowBox[{"p", "&&", "q"}]}], "}"}], ",", " ", 
+       RowBox[{"{", 
+        RowBox[{"p", ",", "q"}], "}"}]}], "]"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{
+      "\"\<p\>\"", ",", "\"\<q\>\"", ",", "\"\<p || q\>\"", ",", 
+       "\"\<p && q\>\""}], "}"}]}], "]"}], ",", 
+   RowBox[{"Frame", "->", "All"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.838907756124837*^9, 3.8389077732415943`*^9}, {
+   3.838907836430173*^9, 3.838908043349156*^9}, 3.838908112109507*^9, {
+   3.83890819879517*^9, 3.838908233333897*^9}},
+ CellLabel->"In[13]:=",ExpressionUUID->"08503144-861e-4350-9048-3d6a92471efa"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\"\<p\>\"", "\"\<q\>\"", "\"\<p || q\>\"", "\"\<p && q\>\""},
+    {"True", "True", "True", "True"},
+    {"True", "False", "True", "False"},
+    {"False", "True", "True", "False"},
+    {"False", "False", "False", "False"}
+   },
+   AutoDelete->False,
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Grid"]], "Input",
+ CellChangeTimes->{{3.83890828417013*^9, 3.838908302059957*^9}},
+ CellLabel->"",ExpressionUUID->"3bca6168-2d20-44b6-8ad6-29f8c2aa3e37"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Grid", "[", 
+  RowBox[{
+   RowBox[{"Prepend", "[", 
+    RowBox[{
+     RowBox[{"BooleanTable", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"p", ",", "q", ",", 
+         RowBox[{"!", "q"}], ",", " ", 
+         RowBox[{"p", " ", "||", " ", 
+          RowBox[{"!", "q"}]}], ",", " ", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"p", " ", "||", " ", 
+            RowBox[{"!", "q"}]}], ")"}], "\[Implies]", "q"}]}], "}"}], ",", 
+       " ", 
+       RowBox[{"{", 
+        RowBox[{"p", ",", "q"}], "}"}]}], "]"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{
+      "\"\<p\>\"", ",", "\"\<q\>\"", ",", "\"\<!q\>\"", ",", " ", 
+       "\"\<p || !q\>\"", ",", " ", "\"\<(p || !q)\[Implies]q\>\""}], "}"}]}],
+     "]"}], ",", 
+   RowBox[{"Frame", "->", "All"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.83891360311368*^9, 3.838913669189592*^9}, {
+  3.838913720920457*^9, 3.838913750062333*^9}, {3.838914275440318*^9, 
+  3.838914281555663*^9}},
+ CellLabel->"In[58]:=",ExpressionUUID->"0f5f6ad7-7913-49da-98c3-e76fdaa9a7cd"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"p\"\>", "\<\"q\"\>", "\<\"!q\"\>", "\<\"p || !q\"\>", "\<\"(p || \
+!q)\[Implies]q\"\>"},
+    {"True", "True", "False", "True", "True"},
+    {"True", "False", "True", "True", "False"},
+    {"False", "True", "False", "False", "True"},
+    {"False", "False", "True", "True", "False"}
+   },
+   AutoDelete->False,
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Grid"]], "Output",
+ CellChangeTimes->{
+  3.838913615123707*^9, 3.8389136711703978`*^9, {3.83891373700381*^9, 
+   3.838913750726522*^9}, 3.838914478716467*^9},
+ CellLabel->"Out[58]=",ExpressionUUID->"25b0e7f4-f98b-425e-91fb-800541412faf"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Grid", "[", 
+  RowBox[{
+   RowBox[{"Prepend", "[", 
+    RowBox[{
+     RowBox[{"BooleanTable", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"p", ",", "q", ",", 
+         RowBox[{"p", " ", "\[Implies]", "q"}], ",", 
+         RowBox[{"q", "\[Implies]", "p"}], ",", " ", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"p", " ", "\[Implies]", " ", "q"}], ")"}], "\[Implies]", 
+          RowBox[{"(", 
+           RowBox[{"q", "\[Implies]", "p"}], ")"}]}]}], "}"}], ",", " ", 
+       RowBox[{"{", 
+        RowBox[{"p", ",", "q"}], "}"}]}], "]"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{
+      "\"\<p\>\"", ",", "\"\<q\>\"", ",", "\"\<p \[Implies]q\>\"", ",", 
+       "\"\<q\[Implies]p\>\"", ",", " ", 
+       "\"\<(p \[Implies] q)\[Implies](q\[Implies]p)\>\""}], "}"}]}], "]"}], 
+   ",", 
+   RowBox[{"Frame", "->", "All"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.8389139360248623`*^9, 3.838913966526186*^9}, {
+  3.838914067326935*^9, 3.838914199940134*^9}, {3.838914230057287*^9, 
+  3.838914370452188*^9}, {3.8389144529537783`*^9, 3.8389144706443367`*^9}, {
+  3.8389145523867683`*^9, 3.838914600651968*^9}, {3.8389146356770372`*^9, 
+  3.838914751300315*^9}},
+ CellLabel->"In[62]:=",ExpressionUUID->"036318c2-5918-4f51-bb1a-32975183a11c"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"p\"\>", "\<\"q\"\>", "\<\"p \[Implies]q\"\>", \
+"\<\"q\[Implies]p\"\>", "\<\"(p \[Implies] q)\[Implies](q\[Implies]p)\"\>"},
+    {"True", "True", "True", "True", "True"},
+    {"True", "False", "False", "True", "True"},
+    {"False", "True", "True", "False", "False"},
+    {"False", "False", "True", "True", "True"}
+   },
+   AutoDelete->False,
+   GridBoxFrame->{"Columns" -> {{True}}, "Rows" -> {{True}}},
+   GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+  "Grid"]], "Output",
+ CellChangeTimes->{3.838914349037608*^9, 3.838914472388829*^9, 
+  3.838914638313257*^9, 3.838914752225491*^9},
+ CellLabel->"Out[62]=",ExpressionUUID->"4db14574-cf08-4109-95c9-ee134a75b579"]
+}, Open  ]]
+},
+WindowSize->{665, 654},
+WindowMargins->{{Automatic, 10}, {1, Automatic}},
+TaggingRules->Association["TryRealOnly" -> False],
+FrontEndVersion->"12.3 for Mac OS X x86 (64-bit) (July 9, 2021)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"af571818-3be5-4c13-9dba-2a6d93a827d1"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 844, 21, 52, "Input",ExpressionUUID->"08503144-861e-4350-9048-3d6a92471efa"],
+Cell[1405, 43, 581, 13, 113, InheritFromParent,ExpressionUUID->"3bca6168-2d20-44b6-8ad6-29f8c2aa3e37"],
+Cell[CellGroupData[{
+Cell[2011, 60, 1066, 28, 52, "Input",ExpressionUUID->"0f5f6ad7-7913-49da-98c3-e76fdaa9a7cd"],
+Cell[3080, 90, 729, 16, 117, "Output",ExpressionUUID->"25b0e7f4-f98b-425e-91fb-800541412faf"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3846, 111, 1289, 30, 73, "Input",ExpressionUUID->"036318c2-5918-4f51-bb1a-32975183a11c"],
+Cell[5138, 143, 734, 15, 117, "Output",ExpressionUUID->"4db14574-cf08-4109-95c9-ee134a75b579"]
+}, Open  ]]
+}
+]
+*)
+

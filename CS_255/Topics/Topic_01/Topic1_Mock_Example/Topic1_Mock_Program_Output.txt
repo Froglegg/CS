@@ -1,0 +1,31 @@
+
+*** Testing file in1.txt *** 
+inside testYear():Testing Year
+
+*** OK ***
+average between 5 and 7 is 1
+
+*** Testing file in2.txt *** 
+inside testYear():Testing Year
+
+*** OK ***
+average between 5 and 7 is 1
+
+*** Testing file in3.txt *** 
+inside testYear():Testing Year
+
+*** OK ***
+average between 5 and 7 is 1
+
+*** Testing file in4.txt *** 
+inside testYear():Testing Year
+
+*** OK ***
+average between 5 and 7 is 1
+
+*** Testing file in5.txt *** 
+inside testYear():Testing Year
+
+*** OK ***
+average between 5 and 7 is 1
+
