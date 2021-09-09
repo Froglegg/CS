@@ -1,6 +1,15 @@
 def in_place_quick_sort(S: list, a: int, b: int):
-    '''O log n '''
-    ''' sort the list from S[a] to S[b] inclusive using the quick sort algorithm'''
+    '''
+    Sorts a list from S[a] to S[b] inclusive using the quick-sort algorithm
+
+    INPUT: List of any length with integer values in the range [1, k]
+
+    OUTPUT: List of integers sorted in ascending order
+
+    Complexity: O(logN)
+
+    Justification: 
+    '''
     # range is trivially sorted
     if a >= b:
         return
@@ -10,6 +19,7 @@ def in_place_quick_sort(S: list, a: int, b: int):
     left = a
     # will scan leftward
     right = b - 1
+
     while left <= right:
         # scan until reaching equal value or larger than pibot (or right marker)
         while left <= right and S[left] < pivot:
@@ -23,14 +33,11 @@ def in_place_quick_sort(S: list, a: int, b: int):
             S[left], S[right] = S[right], S[left]
             # shrink range
             left, right = left+1, right - 1
+
     # put Pivot into its final place (currently marked by left index)
     S[left], S[b] = S[b], S[left]
     # make recursive calls
     in_place_quick_sort(S, a, left-1)
     in_place_quick_sort(S, left+1, b)
-
-
-test = [1, 53, 12, 0, 21, 42, 46, 3, 54, 7]
-
-in_place_quick_sort(test, 0, len(test)-1)
-print(test)
+    # sorts in place, but also can return
+    return S
