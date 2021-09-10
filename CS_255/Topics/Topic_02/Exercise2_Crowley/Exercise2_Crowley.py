@@ -30,7 +30,7 @@ def main():
         #  run bucket sort, output A
         with open(f"out{len(input[1])}a.txt", 'w') as f:
             sortedInput = bucketSort(input[1], input[0])
-            f.writelines(f'{s}\n' for s in sortedInput)
+            f.writelines(f'{s} ' for s in sortedInput)
             # print to command line
             print(
                 f"Bucket sort result for input with {len(input[1])} integers: {[s for s in sortedInput]}\n")
@@ -39,7 +39,7 @@ def main():
 
             sortedInput = quickSort(input[1])
 
-            f.writelines(f'{s}\n' for s in sortedInput[0])
+            f.writelines(f'{s} ' for s in sortedInput[0])
             # print to command line
             print(
                 f"Quick sort result for input with {len(input[1])} integers: {[s for s in sortedInput]}\n")
