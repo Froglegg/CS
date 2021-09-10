@@ -40,7 +40,7 @@ def swap(lyst, i, j):
 
 def main(size=20, sort=quicksort):
     lyst = []
-    for count in range(size):
+    for _ in range(size):
         lyst.append(random.randint(1, size+1))
     print(lyst)
     sort(lyst)
