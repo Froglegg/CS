@@ -1,5 +1,6 @@
 def bucketSort(sequence: list[int], k: int):
     '''
+
     INPUT: List of any length with integer values in the range [1, k]
 
     OUTPUT: List of integers sorted in ascending order

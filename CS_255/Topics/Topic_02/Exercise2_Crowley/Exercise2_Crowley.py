@@ -2,7 +2,7 @@
 # CSC_255_Exercise_02
 from os import listdir
 
-from quickSort import in_place_quick_sort
+from quickSort import quickSort
 from bucketSort import bucketSort
 
 
@@ -36,8 +36,10 @@ def main():
                 f"Bucket sort result for input with {len(input[1])} integers: {[s for s in sortedInput]}\n")
         # run quick sort, output B
         with open(f"out{len(input[1])}b.txt", 'w') as f:
-            sortedInput = in_place_quick_sort(input[1], 0, len(input[1])-1)
-            f.writelines(f'{s}\n' for s in sortedInput)
+
+            sortedInput = quickSort(input[1])
+
+            f.writelines(f'{s}\n' for s in sortedInput[0])
             # print to command line
             print(
                 f"Quick sort result for input with {len(input[1])} integers: {[s for s in sortedInput]}\n")

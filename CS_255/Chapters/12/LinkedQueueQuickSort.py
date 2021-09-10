@@ -43,9 +43,9 @@ def queue_quick_sort(S: LinkedQueue):
     return S
 
 
-# testQueue = LinkedQueue([1, 2, 3])
-# for i in range(10, 0, -1):
-#     testQueue.enqueue(i)
+testQueue = LinkedQueue([1, 2, 3])
+for i in range(10, 0, -1):
+    testQueue.enqueue(i)
 
 print(testQueue)
 queue_quick_sort(testQueue)
