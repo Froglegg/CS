@@ -1,0 +1,23 @@
+Linear Probing, Quadratic Probing, Double Hashing Probing, Collisions.
+
+Please See 4 Example files in this sections. Also please see Topic3 Spring 2021 as Reference.
+
+I will email  input file  for this assignment. Each student will get their individual file.
+
+Input file will have sequence of numbers. 
+
+As Exercise3 you will need to calculate collisions by hand and create docx file with description of the process of Linear probing,
+ Quadratic Probing and Double Hasing Probing similar to Topic3ProbingCollisions_Example.docx with your input file.
+
+Table has size 11 and Double Factor is 7.
+
+As Lab3 you have to write program that do Linear probing, Quadratic Probing and Double Hasing Probing and calculate collisions, 
+but already not by hand, but by program and take as input input file that I send you via email (and you use in Exercise3), 
+your program must produce output file similar to Example_output_Collision_20210913.txt and Example_output_Probing_20210913.txt 
+(Instead of files output can be to console)
+
+Size of table may vary. Double factor may vary. 
+
+You have to take input from file that I email to you,
+
+Each student will get his/her own file.  All files are different.

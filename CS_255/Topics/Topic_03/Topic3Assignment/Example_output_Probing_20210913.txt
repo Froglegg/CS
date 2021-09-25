@@ -1,0 +1,42 @@
+*** Linear probing Random Order Start *** 
+
+print table.size()=11
+index=0 key=75 value=150
+index=1 key=89 value=178
+index=2 key=40 value=80
+index=7 key=18 value=36
+index=8 key=51 value=102
+index=9 key=62 value=124
+index=10 key=73 value=146
+
+*** Linear probing Random Order End *** 
+
+
+*** Quadratic probing Random Order Start *** 
+
+print table.size()=11
+index=0 key=62 value=124
+index=1 key=89 value=178
+index=5 key=73 value=146
+index=7 key=18 value=36
+index=8 key=51 value=102
+index=9 key=75 value=150
+index=10 key=40 value=80
+
+*** Quadratic probing Random Order End *** 
+
+
+*** Double Hashing probing Random Order Start *** 
+
+print table_.size()=11
+index=0 key=73 value=146
+index=1 key=89 value=178
+index=2 key=40 value=80
+index=6 key=51 value=102
+index=7 key=18 value=36
+index=8 key=62 value=124
+index=9 key=75 value=150
+
+*** Double probing Random Order End *** 
+
+
