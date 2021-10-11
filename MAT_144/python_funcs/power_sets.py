@@ -44,3 +44,7 @@ def powerSet(someSet):
     for k in range(1 + size):
         sortedSet += sorted([x for x in powerset if len(x) == k])
     return sortedSet
+
+
+s1 = set(["hey", "there", "bob"])
+print(powerSet(s1))

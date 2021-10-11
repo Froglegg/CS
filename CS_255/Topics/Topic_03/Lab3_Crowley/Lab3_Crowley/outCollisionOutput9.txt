@@ -1,0 +1,132 @@
+*** Random Order Start ***
+
+7 : 14 -> 14, collisions 0
+7 : 14 -> 14, collisions 0
+7 : 14 -> 14, collisions 0
+
+421 : 842 -> 842, collisions 0
+421 : 842 -> 842, collisions 0
+421 : 842 -> 842, collisions 0
+
+12 : 24 -> 24, collisions 0
+12 : 24 -> 24, collisions 0
+12 : 24 -> 24, collisions 0
+
+72 : 144 -> 144, collisions 0
+72 : 144 -> 144, collisions 0
+72 : 144 -> 144, collisions 0
+
+46 : 92 -> 92, collisions 0
+46 : 92 -> 92, collisions 0
+46 : 92 -> 92, collisions 0
+
+379 : 758 -> 758, collisions 0
+379 : 758 -> 758, collisions 0
+379 : 758 -> 758, collisions 0
+
+58 : 116 -> 116, collisions 2
+58 : 116 -> 116, collisions 2
+58 : 116 -> 116, collisions 2
+
+34 : 68 -> 68, collisions 14
+34 : 68 -> 68, collisions 6
+34 : 68 -> 68, collisions 6
+
+42 : 84 -> 84, collisions 0
+42 : 84 -> 84, collisions 0
+42 : 84 -> 84, collisions 0
+
+Linear 16 collisions
+Quadratic 8 collisions
+Double 8 collisions
+
+*** Random Order End *** 
+
+*** Ascending Order Start ***
+
+7 : 14 -> 14, collisions 0
+7 : 14 -> 14, collisions 0
+7 : 14 -> 14, collisions 0
+
+12 : 24 -> 24, collisions 0
+12 : 24 -> 24, collisions 0
+12 : 24 -> 24, collisions 0
+
+34 : 68 -> 68, collisions 2
+34 : 68 -> 68, collisions 2
+34 : 68 -> 68, collisions 2
+
+42 : 84 -> 84, collisions 0
+42 : 84 -> 84, collisions 0
+42 : 84 -> 84, collisions 0
+
+46 : 92 -> 92, collisions 2
+46 : 92 -> 92, collisions 2
+46 : 92 -> 92, collisions 2
+
+58 : 116 -> 116, collisions 2
+58 : 116 -> 116, collisions 2
+58 : 116 -> 116, collisions 0
+
+72 : 144 -> 144, collisions 0
+72 : 144 -> 144, collisions 0
+72 : 144 -> 144, collisions 0
+
+379 : 758 -> 758, collisions 0
+379 : 758 -> 758, collisions 0
+379 : 758 -> 758, collisions 2
+
+421 : 842 -> 842, collisions 10
+421 : 842 -> 842, collisions 8
+421 : 842 -> 842, collisions 4
+
+Linear 16 collisions
+Quadratic 14 collisions
+Double 10 collisions
+
+*** Ascending Order End *** 
+
+*** Descending Order Start ***
+
+421 : 842 -> 842, collisions 0
+421 : 842 -> 842, collisions 0
+421 : 842 -> 842, collisions 0
+
+379 : 758 -> 758, collisions 0
+379 : 758 -> 758, collisions 0
+379 : 758 -> 758, collisions 0
+
+72 : 144 -> 144, collisions 0
+72 : 144 -> 144, collisions 0
+72 : 144 -> 144, collisions 0
+
+58 : 116 -> 116, collisions 2
+58 : 116 -> 116, collisions 2
+58 : 116 -> 116, collisions 2
+
+46 : 92 -> 92, collisions 0
+46 : 92 -> 92, collisions 0
+46 : 92 -> 92, collisions 0
+
+42 : 84 -> 84, collisions 0
+42 : 84 -> 84, collisions 0
+42 : 84 -> 84, collisions 0
+
+34 : 68 -> 68, collisions 0
+34 : 68 -> 68, collisions 0
+34 : 68 -> 68, collisions 0
+
+12 : 24 -> 24, collisions 12
+12 : 24 -> 24, collisions 6
+12 : 24 -> 24, collisions 6
+
+7 : 14 -> 14, collisions 2
+7 : 14 -> 14, collisions 0
+7 : 14 -> 14, collisions 4
+
+Linear 16 collisions
+Quadratic 8 collisions
+Double 12 collisions
+
+*** Descending Order End *** 
+

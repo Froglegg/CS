@@ -1,0 +1,43 @@
+Format of output
+key:  value  ->  retrievedValue , collisions number Collisions
+Linear total number Collisions
+Quadratic total number Collisions
+Double hashing total number Collisions
+
+we use function hash(key)=key for all three hashing
+*** Random Order Start *** 
+
+89 : 178 -> 178, collisions 0
+89 : 178 -> 178, collisions 0
+89 : 178 -> 178, collisions 0
+
+18 : 36 -> 36, collisions 0
+18 : 36 -> 36, collisions 0
+18 : 36 -> 36, collisions 0
+
+51 : 102 -> 102, collisions 2
+51 : 102 -> 102, collisions 2
+51 : 102 -> 102, collisions 4
+
+62 : 124 -> 124, collisions 4
+62 : 124 -> 124, collisions 4
+62 : 124 -> 124, collisions 2
+
+73 : 146 -> 146, collisions 6
+73 : 146 -> 146, collisions 6
+73 : 146 -> 146, collisions 2
+
+75 : 150 -> 150, collisions 4
+75 : 150 -> 150, collisions 0
+75 : 150 -> 150, collisions 0
+
+40 : 80 -> 80, collisions 12
+40 : 80 -> 80, collisions 10
+40 : 80 -> 80, collisions 6
+
+Linear    28 collisions
+Quadratic 22 collisions
+Double    14 collisions
+
+*** Random Order End *** 
+

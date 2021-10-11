@@ -1,0 +1,141 @@
+*** Random Order Start *** 
+
+*** Linear Probing Random Order Start ***
+
+index=1 key=12 value=24
+index=2 key=46 value=92
+index=3 key=421 value=842
+index=4 key=58 value=116
+index=5 key=379 value=758
+index=6 key=72 value=144
+index=7 key=7 value=14
+index=8 key=34 value=68
+index=9 key=42 value=84
+
+*** Linear Probing Random Order End ***
+
+*** Quadratic Probing Random Order Start ***
+
+index=1 key=12 value=24
+index=2 key=46 value=92
+index=3 key=421 value=842
+index=4 key=58 value=116
+index=5 key=379 value=758
+index=6 key=72 value=144
+index=7 key=7 value=14
+index=9 key=42 value=84
+index=10 key=34 value=68
+
+*** Quadratic Probing Random Order End ***
+
+*** Double Probing Random Order Start ***
+
+index=1 key=12 value=24
+index=2 key=46 value=92
+index=3 key=421 value=842
+index=4 key=34 value=68
+index=5 key=379 value=758
+index=6 key=72 value=144
+index=7 key=7 value=14
+index=8 key=58 value=116
+index=9 key=42 value=84
+
+*** Double Probing Random Order End ***
+
+*** Random Order End *** 
+
+
+*** Ascending Order Start *** 
+
+*** Linear Probing Ascending Order Start ***
+
+index=1 key=12 value=24
+index=2 key=34 value=68
+index=3 key=46 value=92
+index=4 key=58 value=116
+index=5 key=379 value=758
+index=6 key=72 value=144
+index=7 key=7 value=14
+index=8 key=421 value=842
+index=9 key=42 value=84
+
+*** Linear Probing Ascending Order End ***
+
+*** Quadratic Probing Ascending Order Start ***
+
+index=1 key=12 value=24
+index=2 key=34 value=68
+index=3 key=46 value=92
+index=4 key=58 value=116
+index=5 key=379 value=758
+index=6 key=72 value=144
+index=7 key=7 value=14
+index=8 key=421 value=842
+index=9 key=42 value=84
+
+*** Quadratic Probing Ascending Order End ***
+
+*** Double Probing Ascending Order Start ***
+
+index=0 key=379 value=758
+index=1 key=12 value=24
+index=2 key=34 value=68
+index=3 key=58 value=116
+index=4 key=421 value=842
+index=5 key=46 value=92
+index=6 key=72 value=144
+index=7 key=7 value=14
+index=9 key=42 value=84
+
+*** Double Probing Ascending Order End ***
+
+*** Ascending Order End *** 
+
+
+*** Descending Order Start *** 
+
+*** Linear Probing Descending Order Start ***
+
+index=1 key=34 value=68
+index=2 key=46 value=92
+index=3 key=421 value=842
+index=4 key=58 value=116
+index=5 key=379 value=758
+index=6 key=72 value=144
+index=7 key=12 value=24
+index=8 key=7 value=14
+index=9 key=42 value=84
+
+*** Linear Probing Descending Order End ***
+
+*** Quadratic Probing Descending Order Start ***
+
+index=1 key=34 value=68
+index=2 key=46 value=92
+index=3 key=421 value=842
+index=4 key=58 value=116
+index=5 key=379 value=758
+index=6 key=72 value=144
+index=7 key=7 value=14
+index=9 key=42 value=84
+index=10 key=12 value=24
+
+*** Quadratic Probing Descending Order End ***
+
+*** Double Probing Descending Order Start ***
+
+index=1 key=34 value=68
+index=2 key=46 value=92
+index=3 key=421 value=842
+index=5 key=379 value=758
+index=6 key=72 value=144
+index=7 key=12 value=24
+index=8 key=58 value=116
+index=9 key=42 value=84
+index=10 key=7 value=14
+
+*** Double Probing Descending Order End ***
+
+*** Descending Order End *** 
+
+

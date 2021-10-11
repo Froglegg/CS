@@ -3,7 +3,7 @@ from collections.abc import MutableMapping
 
 
 class ProbeHashMap(MutableMapping):
-    '''Hash Map implemented with linear probing for collision resolution'''
+    '''Hash Map implemented using probing for collision resolution'''
     # sentinel marks location of previous deletions as AVAILABLE
     _AVAIL = object()
 
