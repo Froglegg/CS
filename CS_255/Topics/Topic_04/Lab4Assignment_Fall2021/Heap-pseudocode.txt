@@ -1,0 +1,34 @@
+/*
+ * Heap pseudocode
+ *
+ *  Created on: June 22, 2018
+ *      Author: Kamilla Murashkina
+ */
+
+class Heap<Comparable>
+
+    private
+
+	vector<Comparable> heapVector 	// heapVector[0] is the minimum of the heap
+				      		// heapVector[0..size()-1] are heap elements
+	
+	void percolateUp(constant Comparable& item) 	// percolating up
+	void percolateDown()   					// percolating down
+
+    public
+
+	constructor()							// default constructor
+
+	constructor( constant Heap& otherHeap )		// may implement either copy
+	void assignCopy( constant Heap& otherHeap )	// constructor or copy assignment
+
+	virtual destructor()						// C++ only
+
+	void insert( constant Comparable& element )	// calls percolateUp
+	void deleteMin()						// calls percolateDown
+
+	int size() constant                             // heap size
+
+	constant Comparable& getElement( constant int index ) constant
+
+endclass

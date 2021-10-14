@@ -1,0 +1,1 @@
+In Lab4 after delete min check that you got heap. It is important for small size of array, when you have 4,3,2,1 elements in array. For small number of elements algorithm for delete min is different than for large numbers of elements in an array.

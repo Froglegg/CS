@@ -1,0 +1,160 @@
+/*
+ * Driver pseudocode
+ *
+ *  Created on: June 22, 2018
+ *      Author: Kamilla Murashkina
+ */
+
+OUTPUT_STREAM    fout            // declare and create an output stream
+vector<Integer>  inputData       // all keys from the input file
+
+// Print data and heap
+
+void printHeap (
+
+    constant string&           description
+    constant Heap<Integer>&    heap
+)
+    fout << description << "\n"
+    fout << "[" << heap.size() << "] "
+    for ( int i = 0; i < heap.size(); ++i ) fout << " " << heap.getElement(i)
+    fout << "\n"
+
+// Consider heap elements ordered if first <= second or second is beyound heap size
+
+boolean areHeapElementsOrdered(
+
+    constant Heap<Integer>&    heap
+    constant int               i
+    constant int               j
+)
+
+    return i >= heap.size() || j >= heap.size() || heap.getElement(i) LESS_OR_EQUAL heap.getElement(j)
+
+// Returns stringized element or "none" if beyond heap size
+
+string heapElement(
+
+    constant Heap<Integer>&    heap
+    constant int               i
+)
+
+    return i<heap.size() ? to_string(heap.getElement(i)) : "none"
+
+
+// Check that it is really a heap, throw an exceeption otherwise
+
+void checkHeap(
+
+    constant Heap<Integer>&    heap
+)
+    for ( int i = 0; i < heap.size(); ++i ) 
+
+        if ( areHeapElementsOrdered(heap,i,i*2+1) && areHeapElementsOrdered(heap,i,i*2+2) ) continue
+
+        printHeap( "Corrupted", heap )
+
+        fout  << "Error: heap violation at index " << i
+              << ", heap[" << i       << "] = " << heapElement(heap,i)
+              << ", heap[" << (i*2+1) << "] = " << heapElement(heap,i*2+1)
+              << ", heap[" << (i*2+2) << "] = " << heapElement(heap,i*2+2)
+              << "\n"
+        throw runtime_error("Not a heap")
+
+    endfor
+
+// Insert one element, check, and print 
+
+void insertOne(
+
+    constant Heap<Integer>&    heap
+    int				    element
+)
+
+    fout << "Insert " << element << "\n"
+
+    heap.insert( element );
+    checkHeap   ( heap )
+
+    printHeap( "Heap after insert "+toString(element), heap )
+
+// Delete minimun element, check, and print
+
+void deleteOne(
+
+    constant Heap<Integer>&    heap
+)
+
+    fout << "Delete " << heap.getElement(0) << "\n"
+    heap.deleteMin( element );
+    checkHeap   ( heap )
+
+// Test heap functions 
+// - insert all input elements
+// - insert 31 and 14
+// - delete all min elements
+
+void testData()
+
+    Heap<Integer> heap
+
+    for ( constant variable& key : inputData ) 
+        heap.insert ( key  )
+        checkHeap   ( heap )
+
+    printHeap( "Heap", heap )
+
+    insertOne( heap, 31 )
+    printHeap( "Heap after insert 31", heap )
+    
+    insertOne( heap, 14 )
+    printHeap( "Heap after insert 14", heap ) 
+   
+    while ( heap.size() > 0 ) 
+       deleteMin( heap )
+       printHeap("Heap after deleteMin", heap)   
+    
+// Read data from the input file Integero a vector and prepare sorted versions of the vector
+
+void readData (
+
+    constant string&  inputFile
+)
+    INPUT_STREAM  fin(inputFile)
+    Integer       key
+
+    fout << "Input data "
+    while ( fin >> key )  
+        inputData.push_back(key)
+        fout << key
+
+    fout << "\n"
+    fin.close()
+    
+// Test the input file, print result to the output file
+
+void testFile (
+
+    constant string&    inputFile
+    constant string&    outputFile
+)
+    fout.open( outputFile )
+    readData ( inputFile  )
+    fout.close()
+
+// Main program
+
+int main()
+
+        try
+		 for ( variable i=1; i<=4; ++i )
+			constant suffix = toString(i)+".txt" 
+			testFile( "in"+suffix, "out"+suffix )
+
+        catch ( constant exception& ex )
+   
+            if ( fout ) fout << "Exception: " << ex.whatMessage() << "\n"
+            stdout << "Exception: " << ex.whatMessage() << "\n"
+        
+endmain
+
