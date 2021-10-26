@@ -1,5 +1,4 @@
-from _typeshed import Self
-from HeapPriorityQueue import HeapPriorityQueue
+from Heaps.HeapPriorityQueue import HeapPriorityQueue
 
 
 class AdaptableHeapPriorityQueue(HeapPriorityQueue):
@@ -12,6 +11,7 @@ class AdaptableHeapPriorityQueue(HeapPriorityQueue):
         def __init__(self, k, v, j) -> None:
             super().__init__(k, v)
             self._index = j
+
     # private methods
 
     def _swap(self, i, j):
@@ -27,7 +27,6 @@ class AdaptableHeapPriorityQueue(HeapPriorityQueue):
         else:
             self._downheap(j)
 
-    # public methods
     def add(self, key, value):
         # init locator index
         token = self.Locator(key, value, len(self._data))

@@ -1,4 +1,4 @@
-from PriorityQueueBase import PriorityQueueBase
+from Heaps.PriorityQueueBase import PriorityQueueBase
 
 
 class HeapPriorityQueue(PriorityQueueBase):
@@ -40,9 +40,9 @@ class HeapPriorityQueue(PriorityQueueBase):
             small_child = left
             if self._has_right(j):
                 right = self._right(j)
-                if self._data[right] < self._data[left]:
+                if self._data[right] <= self._data[left]:
                     small_child = right
-            if self._data[small_child] < self._data[j]:
+            if self._data[small_child] <= self._data[j]:
                 self._swap(j, small_child)
                 # recur at position of small child
                 self._downheap(small_child)
@@ -94,6 +94,12 @@ class HeapPriorityQueue(PriorityQueueBase):
         # then fix new root
         self._downheap(0)
         return(item._key, item._value)
+
+    def getData(self):
+        joined_string = ""
+        for i in self._data:
+            joined_string += f"{i._value} "
+        return joined_string
 
 
 # heap = HeapPriorityQueue()

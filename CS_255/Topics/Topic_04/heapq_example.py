@@ -3,7 +3,9 @@ import heapq
 '''Heapq module provides functions that allow a standard Python list to be managed as a heap.
 elements serve as their own key, however
 '''
-example = [13, 21, 16, 24, 31, 33, 14, 19, 68, 65, 26, 32]
+example = [44, 43, 51, 42, 3, 40, 48, 36, 10, 14, 50, 39, 45, 33,
+           32, 31, 28, 4, 34, 10, 2, 7, 22, 18, 53, 5, 4, 40, 1, 17, 8, 9]
+
 print("EXAMPLE")
 print(example)
 
