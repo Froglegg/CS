@@ -1,0 +1,31 @@
+/*
+ * BitWriter-pseudocode.txt
+ *
+ *  Created on: July 3, 2018
+ *      Author: Kamilla Murashkina
+ */
+
+class BitWriter 
+
+    public
+
+        constructor( OUTPUT_STREAM& fout1 ) 
+
+            fout = fout1
+
+        void write( constant int bit )
+
+            fout << (bit?'1':'0')
+
+        void write( constant BitData& bitData )
+
+            if ( bitData.size() == 0 ) throw runtime_error("BitData size is 0")
+
+            for ( int i=0; i<bitData.size(); ++i ) write(bitData.at(i))
+
+    private
+
+        OUTPUT_STREAM&  fout
+
+endclass
+

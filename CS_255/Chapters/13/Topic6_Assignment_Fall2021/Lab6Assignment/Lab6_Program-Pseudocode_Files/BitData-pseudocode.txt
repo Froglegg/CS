@@ -1,0 +1,50 @@
+/*
+ * BitData-pseudocode.txt
+ *
+ *  Created on: July 3, 2018
+ *      Author: kamilla
+ */
+
+class BitData 
+
+    private
+
+        vector<boolean> v
+
+    public
+
+        constructor()
+
+                v = vector<boolean>()
+
+        constructor(const int bit)
+
+                v = vector<boolean>()
+                v[0] = (bit==1)
+
+        void push_back ( constant int bit )
+
+                v.push_back(bit)
+
+        void pop_back()
+
+                v.pop_back()
+                
+        int at( constant int index ) constant
+
+                return v[index] ? 1 : 0
+
+        int size() constant
+
+                return v.size()
+
+        /**
+        * Function print is used to print debugging information
+        */
+        void print( OUTPUT_STREAM& fout ) constant
+
+                for ( constant variable c : v ) fout << ( c ? "0" : "1" )
+
+endclass
+
+
