@@ -1,11 +1,21 @@
 # Huffman Coding in python
 
-five_string = 'a aa\naab\nab  c\nabc'
+# five_string = 'a aa\naab\nab  c\nabc\n'
 test_string = 'add ab\nto 2**abd'
-test1 = "ab\na\naab"
+# test1 = "ab\na\naab"
 
+# # break into list of lines
+# lines = open('./5_in.txt', 'r').readlines()
+
+# print(lines)
+
+# # # list comprehension to get our lines of integers into the proper format
+# joinedInputList = [[int(item) for item in "".join(sublist).split(' ') if item != ""] for sublist
+#                     in "".join(lines).split("\n") if len(sublist) > 0]
 
 # Creating tree nodes
+
+
 class NodeTree(object):
 
     def __init__(self, left=None, right=None):
