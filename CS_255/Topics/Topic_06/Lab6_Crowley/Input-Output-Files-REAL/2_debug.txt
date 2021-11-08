@@ -12,6 +12,6 @@ makeBitData:
 
  97 'a' {}
 
-Decoding 2_encoded.txt -> 2_decoded.txt
+Decoding 5_encoded.txt -> 5_decoded.txt
 
 !!! Files 2_in.txt and 2_decoded.txt are NOT equal.

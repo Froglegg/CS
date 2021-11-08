@@ -6,10 +6,11 @@ class HuffmanClass:
     # nested huffman tree node class
     class HuffmanNode(object):
 
-        def __init__(self, value=None, left=None, right=None):
+        def __init__(self, value=None, left=None, right=None, count=0):
             self.value = value
             self.left = left
             self.right = right
+            self.count = count
 
         def children(self):
             return(self.left, self.right)
@@ -39,7 +40,7 @@ class HuffmanClass:
         self.frequencyTable = {}
         # pq for debugging purposes
         self.priorityQueue = PQ()
-        self.encoded = self.encode(X)
+        self.encoded = self.HuffmanEncode(X)
         self.decoded = None
 
     def getFrequencyTable(self):
@@ -63,7 +64,7 @@ class HuffmanClass:
 
         def recurse(node, binaryStr=''):
 
-            if node.value is not None and type(node.value) is str:
+            if node is not None and type(node.value) is bytes:
 
                 return {node.value: binaryStr}
 
@@ -91,12 +92,13 @@ class HuffmanClass:
 
         s = ""
 
-        for c in self.plainText:
-            s += encodingTable[str(c)]
+        for char in self.plainText:
+            encoded = chr(int(char)).encode()
+            s += encodingTable[encoded]
 
         return s
 
-    def decode(self, binaryString: str):
+    def HuffmanDecode(self, binaryString: str):
         '''
            Input: encoded Huffman Binary string
            Output: decoded plaintext
@@ -105,20 +107,20 @@ class HuffmanClass:
 
         encodingTable = self.getEncodingTable()
         byteString = ""
-        decodedString = ""
+        decodedString = b""
 
-        for bit in binaryString[2:]:
+        for bit in binaryString:
             byteString += bit
 
             for char, code in encodingTable.items():
                 if byteString == code:
-                    decodedString += chr(int(char))
+                    decodedString += char
                     byteString = ""
                     break
 
         return decodedString
 
-    def encode(self, X: str):
+    def HuffmanEncode(self, X: str):
         '''
         Input: String X of length n with d distinct characters
         Output: Huffman coding tree for X
@@ -127,10 +129,11 @@ class HuffmanClass:
         frequencyTable = {}
 
         for char in X:
-            if char in frequencyTable:
-                frequencyTable[char] += 1
+            encoded = chr(int(char)).encode()
+            if encoded in frequencyTable:
+                frequencyTable[encoded] += 1
             else:
-                frequencyTable[char] = 1
+                frequencyTable[encoded] = 1
 
         self.frequencyTable = frequencyTable
 
@@ -146,7 +149,7 @@ class HuffmanClass:
         for item in freq:
 
             # create node storing character key from frequency map
-            node = self.HuffmanNode(str(item[0]))
+            node = self.HuffmanNode(item[0])
 
             # insert node into priority queue, with its priority key as the characters frequency table value
             Q.add(item[1], node)
@@ -162,10 +165,11 @@ class HuffmanClass:
             (freq2, TreeNode2) = Q.remove_min()
 
             # create new binary tree with freq1+freq2 as node value, and left/right subtrees
-            tree = self.HuffmanNode(freq1+freq2, TreeNode1, TreeNode2)
+            tree = self.HuffmanNode(
+                None, TreeNode1, TreeNode2, count=freq1+freq2)
 
-            # add new binary tree to queue, with key as the sum of the two frequencies (tree.value)
-            Q.add(tree.value, tree)
+            # add new binary tree to queue, with key as the sum of the two frequencies (tree.count)
+            Q.add(tree.count, tree)
 
         if Q.is_empty():
 
