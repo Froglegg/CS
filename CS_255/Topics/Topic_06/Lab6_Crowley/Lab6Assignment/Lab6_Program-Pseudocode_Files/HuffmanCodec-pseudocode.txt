@@ -1,0 +1,116 @@
+/*
+ * HuffmanCodec-pseudocode.txt
+ *
+ *  Created on: Jun 30, 2018
+ *      Author: kamilla
+ */
+
+// This class contains all input/output so HuffmanAlgorithm deals
+// with actual encoding/decoding.
+// 
+// Note that the data streams can have arbitrary bytes so the data
+// has to be read and written as raw bytes
+
+class HuffmanCodec
+
+  private
+
+    HuffmanAlgorithm   huffmanAlgorithm
+
+    void makeFrequencyTable(
+
+        BINARY_INPUT_STREAM&        fin
+    )
+        huffmanAlgorithm.initFrequencyTable()
+
+        loop
+        
+            Byte originalByte
+
+            READ RAW originalByte FROM fin
+            if ( ALL BYTES ARE ALREADY READ ) break
+
+            huffmanAlgorithm.countFrequency( originalByte )
+         
+        endloop
+
+        huffmanAlgorithm.finishFrequencyTable()
+
+    endfunction
+
+    void encodeData(
+
+        BINARY_INPUT_STREAM&        fin,
+        OUTPUT_STREAM&              fout
+    )   
+        loop
+        
+            Byte originalByte
+
+            READ RAW originalByte FROM fin
+            if ( ALL BYTES ARE ALREADY READ ) break
+
+            constant string& encodedString = HuffmanAlgorithm::encodeByte( originalByte )
+        
+            fout >> encodedString
+ 
+        endloop
+
+    endfunction
+
+    void decodeData(
+
+        INPUT_STREAM&                       fin,
+        BINARY_OUTPUT_STREAM&               fout
+    )   
+        boolean decodingComplete = true 
+
+        loop
+
+             Byte encodingByte
+
+             READ RAW encodingByte FROM fin
+             if ( ALL BYTES ARE ALREADY READ ) 
+                    if ( !decodingComplete ) throw runtime_error( "Incomplete encoding at the file end")
+                    break
+
+             // HuffmanAlgorithm::decodeByte shall return two values
+             //
+             //     boolean decodingComplete        - whether decoded byte is ready 
+             //     Byte    decodedByte        - the decoded byte
+             //
+             // Depending on the language and your preferences, you may return these two values
+             // directly, as a pair, as an array, as some object, as an output parameters, etc
+
+             [ decodingComplete, decodedByte ] = HuffmanAlgorithm::decodeByte( encodingByte )
+
+             if ( decodingComplete ) fout >> decodedByte 
+
+        endloop
+    
+    endfunction
+
+  public
+
+    constructor()  // not needed for C++
+
+        huffmanAlgorithm = new HuffmanAlgorithm
+
+    void encodeStream( BINARY_INPUT_STREAM& fin, OUTPUT_STREAM& fout )
+
+        // Read the input stream twice, first to build the tree, second to actually encode
+
+        makeFrequencyTable( fin )
+        huffmanAlgorithm.buildHuffmanTree()
+        huffmanAlgorithm.makeEncodingTable()
+
+        fin.CLEAR_EOF        // language specific - clear end of file and other stream flags
+        fin.SEEK(0)       // language specific - rewind (move to the input file beginning)
+
+        encodeData( fin, fout )
+
+    void decodeStream( INPUT_STREAM& fin, BINARY_OUTPUT_STREAM& fout )
+
+        decodeData( fin, fout )
+
+endclass

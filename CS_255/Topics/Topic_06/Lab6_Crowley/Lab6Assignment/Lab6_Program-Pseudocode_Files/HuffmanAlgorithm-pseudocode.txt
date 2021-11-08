@@ -1,0 +1,210 @@
+/*
+ * HuffmanAlgorithm-pseudocode.txt
+ *
+ *  Created on: Jan 5, 2020
+ *      Author: Kamilla Murashkina
+ */
+
+// This class does encoding and decoding. It does not deal with input/output.
+// The input/output is handled by calling classes
+
+class HuffmanAlgorithm
+
+  // Tree is an alias for a type HuffmanTree<Byte>
+  // If you do not use generics, it is exactly HuffmanTree
+
+  private
+
+    Tree*               huffmanTree
+    vector<Byte>        frequencyTable[256]
+    vector<string>      encodingTable[256] 
+
+    // If your language requires it, lessComparator is to be used in the priority queue below.
+    // Note that it is important to use > (greater) in the lambda.
+    // Use language specific lambda closure definition.
+
+    lessComparator = LAMBDA_CLOSURE( constant Tree* left, constant Tree* right )
+                         return   left->getFrequency() >  right->getFrequency() ||
+                                ( left->getFrequency() == right->getFrequency() && left->getCharacter() > right->getCharacter() )
+
+    // HuffmanQueue is an alias for language specific type representing
+    // a priority queue that has Tree* as elements, so a lower frequency tree  
+    // has higher priority in the queue.
+    // In some programming languages, it can be writen as, or similar to,
+    //
+    // priority_queue<
+    //     constant Tree*,
+    //     vector<constant Tree*>,
+    //     decltype(lessComparator) 
+    // >
+    //
+    // See your language documentation for priority queues
+
+  public
+
+    constructor()  
+
+        frequencyTable = null    // may be needed
+        encodingTable  = null    // may be needed
+        huffmanTree    = null    // may be needed
+
+    destructor()        // C++ only
+
+        delete huffmanTree    
+
+    endfunction
+
+    void initFrequencyTable()
+
+        // frequencyTable may need to be created and/or zeroed first, depending
+        // on the language
+
+        frequencyTable = new vector<Byte>[256]                                // may be needed
+        for ( int i=0; i<frequencyTable.size(); ++i ) frequencyTable [i] = 0  // may be needed
+
+    endfunction
+
+    void countFrequency(
+
+        constant Byte originalByte 
+    )  
+        // TODO Increment the frequency count
+        // Depending on the language, the first increment 
+        // may need a special handling
+
+    void finishFrequencyTable()
+  
+        // TODO Just debug output
+
+        printFrequencyTable()   // Debug output
+
+    endfunction
+
+    void buildHuffmanTree()
+  
+        // TODO Implement the function body that builds huffmanTree
+
+        // huffmanTree may need to be created and old table deleted, depending
+        // on the language
+
+        delete huffmanTree                    // may be needed
+        huffmanTree = new Tree                // may be needed
+
+        HuffmanQueue huffmanQueue     // or heap
+     
+        // Fill a priority queue or a heap.
+        // Depending on your language, you may need to construct
+        // the queue as HuffmanQueue() or as HuffmanQueue(lessComparator).
+        // See the assignment for details.
+
+        printQueue( huffmanQueue )    // or heap
+
+        // Build huffmanTree from the huffmanQueue (or heap)
+
+    endfunction
+
+    void makeEncodingTable()
+
+        // encodingTable may need to be created and/or zeroed first, depending
+        // on the language
+
+        encodingTable = new vector<string>[256]                                  // may be needed
+        for ( constant i=0; i<encodingTable.size(); ++i ) encodingTable[i] = 0   // may be needed
+
+        // TODO Implement the function body that fills encodingTable 
+
+        printEncodingTable()
+    
+    endfunction
+
+    string encodeByte(
+
+        constant Byte originalByte 
+    )  
+        // TODO Implement the encoding function body
+        // The function is supposed to encode the byte as a string constisting
+        // of '0's and '1's and to return the string 
+
+    endfunction
+
+    // Returns two values
+    //
+    //     boolean decodingComplete   - whether decoded byte is ready 
+    //     Byte    decodedByte        - the decoded byte
+    //
+    // Depending on the language and your preferences, you may return these two values
+    // directly, as a pair, as an array, as some object, as an output parameters, etc
+
+    [ boolean decodingComplete, Byte decodedByte ] decodeByte(
+
+        constant Byte                   encodingByte 
+    )  
+        // TODO Implement the decoding function body
+        // The function is supposed to use the byte value to traverse huffmanTree
+        // one level down. If a terminal node is found, 
+        //    decodingComplete is set to true
+        //    decodedByte is set to the terminal node byte
+        // otherwise
+        //    decodingComplete is set to false
+
+    endfunction
+
+  private
+
+    void printFrequencyTable()
+
+        debugStream << "printFrequencyTable:\n\n"
+        for ( Byte i=0; i<frequencyTable.size(); ++i ) 
+
+            if ( frequencyTable[i] == 0 ) continue
+
+	    // setw(3) means the next number formatting width is 3
+	    
+            debugStream << setw(3)  << i << " " << bytePresentation(i) 
+                        << " {" << frequencyTable[i] << "}\n"
+        
+        debugStream << "\n"
+        debugStream.FLUSH()  // language specific 0 - flush buffered data to the output console/file
+
+    endfunction
+
+    void printEncodingTable()
+
+        debugStream << "printEncodingTable:\n\n"
+        for ( Byte i=0; i<encodingTable.size(); ++i ) 
+
+            if ( encodingTable[i].size() == 0 ) continue
+
+            debugStream << setw(3)  << i << " " << bytePresentation(i) 
+                        << " {" << encodingTable[i] << "}\n"
+        
+        debugStream << "\n"
+        debugStream.FLUSH()  // language specific 0 - flush buffered data to the output console/file
+
+    endfunction
+
+    void printFrequency( constant Byte character, constat int frequency )
+    
+        debugStream << character 
+                    << " " << bytePresentation(character)
+                    << " {" << frequency <<"}\n"
+    endfunction
+
+    void printQueue( constant HuffmanQueue& huffmanQueue )
+    
+        debugStream << "printQueue:\n\n"
+        for ( HuffmanQueue q = COPY huffmanQueue; !q.empty(); q.pop() )
+        
+            printFrequency( q.top()->getCharacter(), q.top()->getFrequency() )
+
+        endfor
+
+        debugStream << "\n"
+        debugStream.FLUSH()  // language specific 0 - flush buffered data to the output console/file
+
+    endfunction
+
+
+endclass
+
+

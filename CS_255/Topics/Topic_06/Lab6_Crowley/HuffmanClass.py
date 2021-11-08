@@ -1,3 +1,4 @@
+from typing import ByteString
 from Heaps.Heap import AdaptableHeapPriorityQueue as PQ
 
 
@@ -13,11 +14,18 @@ class HuffmanClass:
         def children(self):
             return(self.left, self.right)
 
+        def hasChildren(self):
+            return (self.left or self.right)
+
         def printTree(self):
             def recurse(node, level=0):
                 if node != None:
                     recurse(node.right, level + 1)
-                    print(' ' * 6 * level + '->', repr(node.value))
+                    if not node.hasChildren():
+                        print(' ' * 6 * level + '->',
+                              repr(chr(int(node.value))))
+                    else:
+                        print(' ' * 6 * level + '->', repr(node.value))
                     recurse(node.left, level + 1)
 
             recurse(self)
@@ -25,8 +33,8 @@ class HuffmanClass:
         def __str__(self):
             return str(self.value)
 
-    def __init__(self, X: str = "") -> None:
-        '''Huffmans class inits with a plaintext string and encodes it using Huffman's Algorithm (see self.encode)'''
+    def __init__(self, X: ByteString = b"") -> None:
+        '''Huffmans class inits with a byte string and encodes it using Huffman's Algorithm (see self.encode)'''
         self.plainText = X
         self.frequencyTable = {}
         # pq for debugging purposes
@@ -49,6 +57,7 @@ class HuffmanClass:
         '''
         Returns python dict with character keys and huffman binary strings as values
         '''
+        # if empty, i.e., there was nothing in the input file, return None
         if self.encoded is None:
             return {}
 
@@ -83,7 +92,8 @@ class HuffmanClass:
         s = ""
 
         for c in self.plainText:
-            s += encodingTable[c]
+            s += encodingTable[str(c)]
+
         return s
 
     def decode(self, binaryString: str):
@@ -92,16 +102,20 @@ class HuffmanClass:
            Output: decoded plaintext
            complexity: quadratic O(n^2)
         '''
+
         encodingTable = self.getEncodingTable()
         byteString = ""
         decodedString = ""
-        for bit in binaryString:
+
+        for bit in binaryString[2:]:
             byteString += bit
+
             for char, code in encodingTable.items():
                 if byteString == code:
-                    decodedString += char
+                    decodedString += chr(int(char))
                     byteString = ""
                     break
+
         return decodedString
 
     def encode(self, X: str):
@@ -113,7 +127,6 @@ class HuffmanClass:
         frequencyTable = {}
 
         for char in X:
-
             if char in frequencyTable:
                 frequencyTable[char] += 1
             else:
@@ -124,21 +137,22 @@ class HuffmanClass:
         # Initialize a priority queue Q
         Q = PQ()
 
+        # sort frequency table items by frequency
         freq = sorted(frequencyTable.items(),
                       key=lambda x: x[1], reverse=True)
 
         # for each character c in X string, create a single node binary tree storing c
         # and insert tree into priority q with key as frequencyTable[c] and value as tree
-        for char in freq:
+        for item in freq:
 
             # create node storing character key from frequency map
-            node = self.HuffmanNode(char[0])
+            node = self.HuffmanNode(str(item[0]))
 
             # insert node into priority queue, with its priority key as the characters frequency table value
-            Q.add(char[1], node)
+            Q.add(item[1], node)
 
             # insert into self.pq for debugging purposes
-            self.priorityQueue.add(char[1], node)
+            self.priorityQueue.add(item[1], node)
 
         # dequeue PQ and create new binary node with dequeued nodes as left and right subtrees
         while len(Q) > 1:
@@ -154,9 +168,11 @@ class HuffmanClass:
             Q.add(tree.value, tree)
 
         if Q.is_empty():
+
             return None
 
         else:
+
             (_, tree) = Q.remove_min()
 
             return tree

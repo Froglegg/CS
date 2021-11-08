@@ -1,0 +1,21 @@
+/*
+ * Utilities-pseudocode.txt
+ *
+ *  Created on: July 3, 2018
+ *      Author: Kamilla Murashkina
+ */
+
+global OUTPUT_STREAM debugStream
+
+string bytePresentation( const Byte byte )
+
+        if ( byte == '\n' ) return "\\n"
+        if ( byte == '\r' ) return "\\r"
+        if ( byte == '\t' ) return "\\t"
+
+        if ( byte >= ' ' && byte <= '~' )
+                 return "'"+byte+"'"
+
+        return TO_HEXADECIMAL(byte)  // like 0xf7
+
+endfunction
