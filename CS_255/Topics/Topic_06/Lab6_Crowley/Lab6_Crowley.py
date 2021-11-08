@@ -23,10 +23,11 @@ def main():
             encodedString = lines
             b64Boolean = False
 
-            # try to read in utf-8, for example, regular text files
-            # if utf-8 works, then we can use the regular binary byte stream
+            # try to read in file as ascii, for example, regular text files
+            # if ascii works, then we can use the regular binary byte stream
             try:
-                lines.decode('utf-8')
+                lines.decode('ascii')
+
             # if it throws a UnicodeDecodeError, as happens with PDFs, encode lines into bytes using base 64
             except UnicodeDecodeError:
                 encodedString = base64.b64encode(lines)
@@ -50,6 +51,7 @@ def main():
         print(
             f"*** Testing file {inputFileName}, debug output file {debugFileName} ***")
 
+        # Instantiate HuffmanClass, HuffmanClass encodes input using Huffman's Algorithm upon initialization
         HuffmanTree = HuffmanClass(input[1])
 
         freqTable = HuffmanTree.getFrequencyTable()
@@ -90,13 +92,13 @@ def main():
             freqList = sorted(freqTable.items(), key=lambda x: x[0])
 
             for item in freqList:
-                f.write(f" {ord(item[0].decode())} {repr(item[0].decode())} " +
+                f.write(f" {ord(item[0].decode())} {ascii(item[0].decode())} " +
                         "{" + str(item[1]) + "}\n")
 
             # create new list and append items from priority queue and sort by Frequency ascending, and then by ASCII value of character (ord(x)[0])
             f.write("\nprintQueue:\n\n")
 
-            pqList = sorted([(ord(item._value.value.decode()), repr(item._value.value.decode()),
+            pqList = sorted([(ord(item._value.value.decode()), ascii(item._value.value.decode()),
                               item._key) for item in priorityQueue], key=lambda x: (x[2], x[0]))
 
             for item in pqList:
@@ -106,7 +108,7 @@ def main():
             # create new list and append items from encoding table and sort by ASCII value of character (ord(x[0]))
             f.write("\nmakeBitData:\n\n")
 
-            encodingList = sorted([(ord(item[0].decode()), repr(item[0].decode()), item[1])
+            encodingList = sorted([(ord(item[0].decode()), ascii(item[0].decode()), item[1])
                                    for item in encodingTable.items()], key=lambda x: (x[0]))
 
             for item in encodingList:

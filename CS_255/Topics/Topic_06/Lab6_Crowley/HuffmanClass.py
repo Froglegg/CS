@@ -59,13 +59,16 @@ class HuffmanClass:
         Returns python dict with character keys and huffman binary strings as values
         '''
         # if empty, i.e., there was nothing in the input file, return None
+
         if self.encoded is None:
             return {}
 
         def recurse(node, binaryStr=''):
 
             if node is not None and type(node.value) is bytes:
-
+                # condition for only one character
+                if binaryStr == '':
+                    binaryStr = '0'
                 return {node.value: binaryStr}
 
             (l, r) = node.children()
@@ -129,10 +132,13 @@ class HuffmanClass:
         frequencyTable = {}
 
         for char in X:
+
             encoded = chr(int(char)).encode()
+
             if encoded in frequencyTable:
                 frequencyTable[encoded] += 1
             else:
+
                 frequencyTable[encoded] = 1
 
         self.frequencyTable = frequencyTable
