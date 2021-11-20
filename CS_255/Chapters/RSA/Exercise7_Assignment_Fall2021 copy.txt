@@ -1,0 +1,20 @@
+Exercise7 Assignment
+
+Each student gets their actual numbers for p.q,e,r via personal email.
+
+r is encrypted message
+
+s is decrypted message.
+
+Your goal is to find s.
+
+Please see supportive txt and pdf files in Topic7 as a reference.
+Actual assignment is individual for each student and will be emailed 
+to student by student request or in week when the assignment starts.
+
+Given to student p, q, e, r
+
+Find n,d,s
+
+Write program that claculates answers on this assignment.
+Submit answers (n,d,s) and your program.

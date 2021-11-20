@@ -1,0 +1,30 @@
+Lab7 Assignment
+
+Please see supportive txt and pdf files in Topic7 as a reference.
+Actual assignment is individual for each student and will be emailed 
+to student by student request or in week when the assignment starts.
+
+Given to student p, q, e, r r is encrypted text, 
+Find n,d,s, s is decrypted text
+
+Write program that claculates answers on this assignment.
+Submit answers (n,d,s) and your program.
+use long integers, do not use BigNumber
+
+Implement your own function pown() 
+long powm(long b, long p, long m);
+Returns (b^p) % m. 
+
+Decrypt code until text
+a is 01
+b is 02
+..
+z is 26
+
+aa is 101
+ab is 102
+..
+az is 126
+
+If need use code from Exercise7 (if you wrote program) and from 
+Lab2 (when you used coding-decoding)

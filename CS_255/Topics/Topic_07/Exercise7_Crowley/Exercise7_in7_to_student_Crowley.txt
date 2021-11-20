@@ -1,0 +1,7 @@
+studentName Student7
+Given to student p,q,e,r
+p 13
+q 149
+e 257
+r 1907
+Find n,d,s

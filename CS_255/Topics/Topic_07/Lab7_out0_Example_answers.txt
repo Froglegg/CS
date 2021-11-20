@@ -1,0 +1,20 @@
+studentName Example
+OriginalNumberToEncrypt = 101 is OriginalTextToEncrypt = aa
+p = 7
+q = 37
+e = 257
+d = 137
+n = 259
+encryptedNumber r = 159
+OriginalNumberToEncrypt = 101 is OriginalTextToEncrypt=aa
+decrypted number s = 101 OK
+decrypted text s_str = aa
+Solve for student Example
+Given to student p = 7, q = 37, e = 257, r = 159
+Find n,d,s
+Solve for student Example
+d 137
+n 259
+decrypted number s = 101 OK
+decrypted text s_str = aa
+s = 101 s_str = aa OK

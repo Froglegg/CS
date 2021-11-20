@@ -9,7 +9,7 @@ strMsg1 = [i for i in strMsg[0:len(strMsg) // 2]]
 strMsg1.reverse()
 strMsg2 = [i for i in strMsg[len(strMsg) // 2:]]
 strMsg2.reverse()
-strMsg2.so
+# strMsg2.so
 print("".join(strMsg1), "".join(strMsg2))
 # the plaintext secret message
 print("~*~*~*~*~*~*")

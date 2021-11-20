@@ -108,8 +108,10 @@ class ProbeHashMap(MutableMapping):
             '''Double hashing takes the hashed key j and hashes it again with a secondary hashing function: prime - (j mod len(hashTable))'''
 
             def primes(n):
-                ''' primes function builds a list of primes up to a number n, exclusive
-                we use this function in double hashing to find the greatest prime that is less than the total length of the table'''
+                ''' 
+                primes function builds a list of primes up to a number n, exclusive
+                we use this function in double hashing to find the greatest prime that is less than the total length of the table
+                '''
                 # simple sieve of multiples
                 odds = range(3, n, 2)
                 sieve = set(sum([list(range(q*q, n+1, q+q))

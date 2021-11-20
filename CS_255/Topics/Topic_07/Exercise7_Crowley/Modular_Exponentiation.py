@@ -1,5 +1,5 @@
 # in Cryptography, it is important to be able to find modular exponent (b^n mod m) efficiently
-# base on section 4.2.4 in Discrete Math (Rosen)
+# base on pseudocode in section 4.2.4 in Discrete Math (Rosen)
 def modular_Exponentiation(b, n, m):
     """
     INPUTS: base b, exponent n, and modulus integer m
@@ -40,12 +40,7 @@ def binary_Expansion_Integer(num: int):
 
     return result
 
-# Python3 program to find modular
-# inverse of a under modulo m
-
-# A naive method to find modulor
-# multiplicative inverse of 'a'
-# under modulo 'm'
+# modInverse taken from suggested link: https://www.geeksforgeeks.org/multiplicative-inverse-under-modulo-m/
 
 
 def modInverse(a, m):

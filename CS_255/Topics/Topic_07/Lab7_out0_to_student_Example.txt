@@ -1,0 +1,7 @@
+studentName Example
+Given to student p,q,e,r
+p 7
+q 37
+e 257
+encrypted number r= 159
+Find n,d, decrypted number s, decrypted text s_str

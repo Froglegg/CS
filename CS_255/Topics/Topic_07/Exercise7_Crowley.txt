@@ -1,0 +1,17 @@
+Running RSA Algorithms to find the RSA Modulus (n), the decryption exponent (d), 
+and the decrypted message (s) for the given input:
+
+first prime p: 13
+second prime q: 149
+encryption exponent e: 257
+encrypted message r: 1907
+
+Initializing RSA class with the given input...
+
+Results
+~*~*~*~*~*~*~*~*
+RSA Modulus n: 1937
+Decryption exponent d (this should be private!): 1313
+Decrypted message s: 68
+n, d, s = 1937, 1313, 68
+~*~*~*~*~*~*~*~*
