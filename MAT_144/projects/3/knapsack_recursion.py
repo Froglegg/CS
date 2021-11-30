@@ -9,7 +9,7 @@ def knapsackRecursion(bookList: list, w: int, n: int):
     '''
 
     # Base case, no item is available or all weight capacity is exhausted (bag is full)
-    if (n == 0 or w == 0):
+    if (n < 0 or w == 0):
         return 0
 
     # if current element weight is greater than weight capacity, skip it and recur
