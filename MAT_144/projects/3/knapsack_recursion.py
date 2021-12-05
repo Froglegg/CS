@@ -1,4 +1,4 @@
-def knapsackRecursion(bookList: list, w: int, n: int):
+def knapsackRecursion(bookList: list, w: int, n: int, lyst: list):
     '''
     Inputs:
     Booklist of books that have weight and value
@@ -14,12 +14,12 @@ def knapsackRecursion(bookList: list, w: int, n: int):
 
     # if current element weight is greater than weight capacity, skip it and recur
     if(book_dict[n]["Weight"] > w):
-        return knapsackRecursion(bookList, w, n-1)
+        return knapsackRecursion(bookList, w, n-1, lyst)
 
     # else, return decision tree of max(exclude, include)
     else:
-        return max(knapsackRecursion(bookList, w, n-1),
-                   bookList[n]["Value"] + knapsackRecursion(bookList, w-bookList[n]["Weight"], n-1))
+        return max(knapsackRecursion(bookList, w, n-1, lyst),
+                   bookList[n]["Value"] + knapsackRecursion(bookList, w-bookList[n]["Weight"], n-1, lyst))
 
 
 book_dict = {
@@ -48,6 +48,7 @@ book_dict = {
 book_list = list(book_dict.values())
 maxWeight = 10
 
-
-test = knapsackRecursion(book_list, maxWeight, len(book_dict)-1, )
+testList = []
+test = knapsackRecursion(book_list, maxWeight, len(book_dict)-1, testList)
 print(test)
+print(testList)

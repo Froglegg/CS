@@ -20,15 +20,15 @@ book_dict = {
         "Value": 1
     },
     2: {
-        "Weight": 2,
-        "Value": 2
-    },
-    3: {
         "Weight": 3,
         "Value": 3
     },
+    3: {
+        "Weight": 5,
+        "Value": 2
+    },
     4: {
-        "Weight": 4,
+        "Weight": 7,
         "Value": 4
     }
 }
@@ -82,47 +82,55 @@ def knapsackAlgorithm(weight_of_knapsack: int, book_dict: dict) -> list:
     return best_possible_book_list
 
 
-# print(knapsackAlgorithm(3, book_dict))
+best_possible_books_list = knapsackAlgorithm(
+    10, book_dict)
+print("\n~*~*~~*~*~ Processing finished! ~*~*~*~*~*~")
+totalValue = {}
+for i in range(len(best_possible_books_list)):
+    totalValue[i] = 0
+    print(f"\nBest possible book list {i+1}: ")
+    for book in best_possible_books_list[i]:
+        print(book)
+        totalValue[i] += book["Value"]
+    print(totalValue)
 
 
-def knapsackProblem():
-    weight_of_knapsack = 0
-    number_of_items = 0
-    book_dict = {}
+# def knapsackProblem():
+#     weight_of_knapsack = 0
+#     number_of_items = 0
+#     book_dict = {}
 
-    print("\n~*~*~*~ Knapsack Problem ~*~*~*~*\n")
-    print("You are a well-known, ambitious, and rich book collector in Ancient Athens, trying to expand your library by any means necessary.\nYou've recently been introduced to a skilled cat burglar who has offered his services to you, however, he has only so much room in his knapsack and can only steal so many books for you.\nHe needs a list of all the books you might want, as well as their weights and estimated market value, so that he can make the best possible heist.")
-    print("Aristotle and a time travelling computer programmer named Hayes Crowley have worked together to write you a program to help you craft this list. All you need to do is follow the instructions below (note: Please use integers for all inputs!)\n")
-    print("~*~*~*~~*~* Begin User Input ~*~*~*~*~*~*\n")
+#     print("\n~*~*~*~ Knapsack Problem ~*~*~*~*\n")
+#     print("You are a well-known, ambitious, and rich book collector in Ancient Athens, trying to expand your library by any means necessary.\nYou've recently been introduced to a skilled cat burglar who has offered his services to you, however, he has only so much room in his knapsack and can only steal so many books for you.\nHe needs a list of all the books you might want, as well as their weights and estimated market value, so that he can make the best possible heist.")
+#     print("Aristotle and a time travelling computer programmer named Hayes Crowley have worked together to write you a program to help you craft this list. All you need to do is follow the instructions below (note: Please use integers for all inputs!)\n")
+#     print("~*~*~*~~*~* Begin User Input ~*~*~*~*~*~*\n")
 
-    while True:
-        try:
-            weight_of_knapsack = int(
-                input("How much weight can the knapsack carry?: "))
-            number_of_items = int(
-                input("How many books are you trying to acquire?: "))
-            for item in range(number_of_items):
-                book_dict[item] = {
-                    "Name": f"Book {item + 1}"
-                }
-                book_dict[item]['Weight'] = int(
-                    input(f"Please enter the weight of book {item + 1}: "))
-                book_dict[item]['Value'] = int(input(
-                    f"Please enter the value if book {item + 1} (in drachmas): "))
+#     while True:
+#         try:
+#             weight_of_knapsack = int(
+#                 input("How much weight can the knapsack carry?: "))
+#             number_of_items = int(
+#                 input("How many books are you trying to acquire?: "))
+#             for item in range(number_of_items):
+#                 book_dict[item] = {
+#                     "Name": f"Book {item + 1}"
+#                 }
+#                 book_dict[item]['Weight'] = int(
+#                     input(f"Please enter the weight of book {item + 1}: "))
+#                 book_dict[item]['Value'] = int(input(
+#                     f"Please enter the value if book {item + 1} (in drachmas): "))
 
-            best_possible_books_list = knapsackAlgorithm(
-                weight_of_knapsack, book_dict)
-            print("\n~*~*~~*~*~ Processing finished! ~*~*~*~*~*~")
-            for i in range(len(best_possible_books_list)):
-                print(f"\nBest possible book list {i+1}: ")
-                print([book for book in best_possible_books_list[i]])
+#     best_possible_books_list = knapsackAlgorithm(
+#         weight_of_knapsack, book_dict)
+#     print("\n~*~*~~*~*~ Processing finished! ~*~*~*~*~*~")
+#     for i in range(len(best_possible_books_list)):
+#         print(f"\nBest possible book list {i+1}: ")
+#         print([book for book in best_possible_books_list[i]])
 
-            break
-        except ValueError:
-            print("Please enter an integer!")
-
-    pass
+#             break
+#         except ValueError:
+#             print("Please enter an integer!")
 
 
-if __name__ == "__main__":
-    knapsackProblem()
+# if __name__ == "__main__":
+#     knapsackProblem()
