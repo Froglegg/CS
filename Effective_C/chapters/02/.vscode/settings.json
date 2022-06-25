@@ -1,0 +1,25 @@
+{
+    "files.associations": {
+        "**/*.html": "html",
+        "**/templates/**/*.html": "django-html",
+        "**/templates/**/*": "django-txt",
+        "**/requirements{/**,*}.{txt,in}": "pip-requirements",
+        "__bit_reference": "c",
+        "__mutex_base": "c",
+        "__node_handle": "c",
+        "array": "c",
+        "ios": "c",
+        "istream": "c",
+        "optional": "c",
+        "ostream": "c",
+        "sstream": "c",
+        "streambuf": "c",
+        "string_view": "c",
+        "tuple": "c",
+        "variant": "c",
+        "vector": "c",
+        "__functional_03": "c",
+        "functional": "c",
+        "memory": "c"
+    }
+}
