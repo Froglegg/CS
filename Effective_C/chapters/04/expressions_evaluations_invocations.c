@@ -40,6 +40,7 @@ void g_implicit(int func(void)) {
   else
     printf("success!");
 }
+
 int main(void) {
   g(f);
   g_implicit(f);

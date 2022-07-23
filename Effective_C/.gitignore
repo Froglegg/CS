@@ -6,3 +6,7 @@
 !*.*
 # but ignore .out executables
 *.out
+# ignore any vscode stuff
+.vscode
+#ignore debug dSYM stuff
+*.dSYM
