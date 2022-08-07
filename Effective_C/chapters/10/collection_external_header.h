@@ -14,4 +14,3 @@ extern int remove_from_collection(collection_type *col, const void *data,
                                   size_t byteCount);
 extern int find_in_collection(const collection_type *col, const void *data,
                               size_t byteCount);
-
